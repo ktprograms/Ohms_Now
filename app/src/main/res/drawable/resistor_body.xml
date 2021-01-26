@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ GNU General Public License v3.0
+  ~
+  ~ Copyright (c) 2021 Toh Jeen Gie Keith
+  ~
+  ~
+  ~ This file is part of Ohms Now!.
+  ~
+  ~ Ohms Now! is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Ohms Now! is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="110dp"
+    android:viewportWidth="200.0"
+    android:viewportHeight="110.0">
+
+    <!--<path android:fillColor="#33FFFFFF"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M0,0  L200,0  L200,200  L0,200  Z" />-->
+
+    <path android:fillColor="#FFFAD6A5"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M50,30  H150  C180,10 190,30 190,50  V60  C190,80 180,100 150,80  H50  C20,100 10,80 10,60  V50  C10,30 20,10 50,30  Z" />
+
+    <!--<path android:fillColor="#FF0000FF"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M30,22.7  Q37,23 45,27.9  L45,82  Q37,87 30,87.3  Z" />
+
+    <path android:fillColor="#FFC0C0C0"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M55,31  L70,31  L70,79  L55,79  Z" />
+
+    <path android:fillColor="#FFFF0000"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M80,31  L95,31  L95,79  L80,79  Z" />
+
+    <path android:fillColor="#FF9400D3"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M105,31  L120,31  L120,79  L105,79  Z" />
+
+    <path android:fillColor="#FFD4AF37"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M170,22.7  Q163,23 155,27.9  L155,82  Q163,87 170,87.3  Z" />
+
+    <path android:fillColor="#FF000000"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M0,45  L10,45  L10,65  L0,65  Z" />
+
+    <path android:fillColor="#FF000000"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M190,45  L200,45  L200,65  L190,65  Z" />-->
+</vector>

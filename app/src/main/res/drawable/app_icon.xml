@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ GNU General Public License v3.0
+  ~
+  ~ Copyright (c) 2021 Toh Jeen Gie Keith
+  ~
+  ~
+  ~ This file is part of Ohms Now!.
+  ~
+  ~ Ohms Now! is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Ohms Now! is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="80.0"
+    android:viewportHeight="80.0">
+
+    <path android:fillColor="#FFFAD6A5"
+        android:strokeWidth="0"
+        android:strokeColor="#00000000"
+        android:pathData="M0,0  L80,0  L80,80  L0,80  Z" />
+
+    <path android:fillColor="#00000000"
+        android:strokeWidth="5"
+        android:strokeColor="#FF000000"
+        android:pathData="M5,50  L15,65  L30,65  C0,0 80,0 50,65  L65,65  L75,50" />
+</vector>
