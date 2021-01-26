@@ -30,7 +30,7 @@ Simply tap on each band to change its colour. Once you have set all the bands to
 <hr />
 
 ## Download
-[Download the APK](https://github.com/ktprograms/WaterTracker/blob/master/app/release/OhmsNow0.1.0beta.apk)
+[Download the APK](https://github.com/ktprograms/Ohms_Now/blob/master/app/release/OhmsNow0.1.0beta.apk)
 
 ## Checksums (All versions)
 **V 0.1.0 Beta:**
