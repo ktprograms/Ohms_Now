@@ -1,1 +1,1 @@
-helps you decode resistor colour bands
+Helps you decode resistor colour bands
