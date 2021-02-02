@@ -1,0 +1,2 @@
+Added support for dark mode.
+Added popup menu to choose band color on long click.

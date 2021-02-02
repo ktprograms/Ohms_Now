@@ -1,3 +1,4 @@
 <i>Ohms Now!</i> is a simple app that helps you decode resistor colour bands.
 
 Simply tap on each band to change its colour. Once you have set all the bands to match your resistor's colours, you can then read its value in the text field below.
+By long pressing on a band, a popup menu shows up to let you choose the band's color.

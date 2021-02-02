@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ GNU General Public License v3.0
+  ~
+  ~ Copyright (c) 2021 Toh Jeen Gie Keith
+  ~
+  ~
+  ~ This file is part of Ohms Now!.
+  ~
+  ~ Ohms Now! is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Ohms Now! is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/multiplierBandPink"
+        android:title="0.0xx Ω    Pink" />
+
+    <item
+        android:id="@+id/multiplierBandSliver"
+        android:title="0.xx Ω    Silver" />
+
+    <item
+        android:id="@+id/multiplierBandGold"
+        android:title="x.x Ω    Gold" />
+
+    <item
+        android:id="@+id/multiplierBandBlack"
+        android:title="xx Ω    Black" />
+
+    <item
+        android:id="@+id/multiplierBandBrown"
+        android:title="xx0 Ω    Brown" />
+
+    <item
+        android:id="@+id/multiplierBandRed"
+        android:title="x.x KΩ    Red" />
+
+    <item
+        android:id="@+id/multiplierBandOrange"
+        android:title="xx KΩ    Orange" />
+
+    <item
+        android:id="@+id/multiplierBandYellow"
+        android:title="xx0 KΩ    Yellow" />
+
+    <item
+        android:id="@+id/multiplierBandGreen"
+        android:title="x.x MΩ    Green" />
+
+    <item
+        android:id="@+id/multiplierBandBlue"
+        android:title="xx MΩ    Blue" />
+
+    <item
+        android:id="@+id/multiplierBandViolet"
+        android:title="xx0 MΩ    Violet" />
+
+    <item
+        android:id="@+id/multiplierBandGrey"
+        android:title="x.x GΩ    Grey" />
+
+    <item
+        android:id="@+id/multiplierBandWhite"
+        android:title="xx GΩ    White" />
+</menu>

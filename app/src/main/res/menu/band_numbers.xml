@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ GNU General Public License v3.0
+  ~
+  ~ Copyright (c) 2021 Toh Jeen Gie Keith
+  ~
+  ~
+  ~ This file is part of Ohms Now!.
+  ~
+  ~ Ohms Now! is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Ohms Now! is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/bandBlack"
+        android:title="0    Black" />
+
+    <item
+        android:id="@+id/bandBrown"
+        android:title="1    Brown" />
+
+    <item
+        android:id="@+id/bandRed"
+        android:title="2    Red" />
+
+    <item
+        android:id="@+id/bandOrange"
+        android:title="3    Orange" />
+
+    <item
+        android:id="@+id/bandYellow"
+        android:title="4    Yellow" />
+
+    <item
+        android:id="@+id/bandGreen"
+        android:title="5    Green" />
+
+    <item
+        android:id="@+id/bandBlue"
+        android:title="6    Blue" />
+
+    <item
+        android:id="@+id/bandViolet"
+        android:title="7    Violet" />
+
+    <item
+        android:id="@+id/bandGrey"
+        android:title="8    Grey" />
+
+    <item
+        android:id="@+id/bandWhite"
+        android:title="9    White" />
+</menu>
