@@ -27,12 +27,22 @@ Ohms Now! is a simple app that helps you decode resistor colour bands.
 ![Image1](https://github.com/ktprograms/Ohms_Now/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png?raw=true)
 
 Simply tap on each band to change its colour. Once you have set all the bands to match your resistor's colours, you can then read its value in the text field below.
+
+![Image2](https://github.com/ktprograms/Ohms_Now/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png?raw=true)
+
+By long pressing on a band, there will be a popup menu for you to choose the band's colour.
 <hr />
 
 ## Download
-[Download the APK](https://github.com/ktprograms/Ohms_Now/blob/master/app/release/OhmsNow0.1.0beta.apk)
+[Download the APK](https://github.com/ktprograms/Ohms_Now/blob/master/app/release/OhmsNow0.1.1beta.apk)
 
 ## Checksums (All versions)
+**V 0.1.1 Beta:**
+
+>MD5: 90be266aa3287360fab383f2c4e5288a
+>
+>SHA1: e825966e4bd1a2e8c85b6ad2f4e31db2f2f4adc3
+
 **V 0.1.0 Beta:**
 
 >MD5: 5dbba6f3b94e89e59ada468312562ed8
@@ -40,6 +50,11 @@ Simply tap on each band to change its colour. Once you have set all the bands to
 >SHA1: e52a55d499a5b4f56792d5dc7c70eee5abe2e08c
 
 # Changelogs
+**V 0.1.1 Beta:**
+
+>Added support for dark mode.
+>Added popup menu to choose band color on long click.
+
 **V 0.1.0 Beta:**
 
 >Initial release
