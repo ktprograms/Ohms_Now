@@ -26,11 +26,8 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
