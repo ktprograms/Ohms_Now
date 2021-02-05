@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ GNU General Public License v3.0
   ~
   ~ Copyright (c) 2021 Toh Jeen Gie Keith
@@ -22,13 +21,20 @@
   -->
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="80dp"
-    android:height="80dp"
-    android:viewportWidth="80.0"
-    android:viewportHeight="80.0">
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.67716"
+        android:scaleY="0.67716"
+        android:translateX="26.9136"
+        android:translateY="26.412">
 
-    <path android:fillColor="@android:color/transparent"
-        android:strokeWidth="5"
-        android:strokeColor="@android:color/black"
-        android:pathData="M5,50  L15,65  L30,65  C0,0 80,0 50,65  L65,65  L75,50" />
+        <path
+            android:fillColor="@android:color/transparent"
+            android:pathData="M5,50  L15,65  L30,65  C0,0 80,0 50,65  L65,65  L75,50"
+            android:strokeWidth="5"
+            android:strokeColor="@android:color/black" />
+    </group>
 </vector>

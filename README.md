@@ -1,60 +1,40 @@
 # Ohms Now!
 
-GNU General Public License v3.0
-
-Copyright (c) 2021 Toh Jeen Gie Keith
-
-<hr/>
-
-This file is part of Ohms Now!.
-
-Ohms Now! is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Ohms Now! is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
-
 ## About
 Ohms Now! is a simple app that helps you decode resistor colour bands.
 
-![Image1](https://github.com/ktprograms/Ohms_Now/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/1.png?raw=true)
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" width="214" height="419" />
 
-Simply tap on each band to change its colour. Once you have set all the bands to match your resistor's colours, you can then read its value in the text field below.
+Simply tap on each band to change its colour.
+Once you have set all the bands to match your resistor's colours, you can then read its value in the text field below.
 
-![Image2](https://github.com/ktprograms/Ohms_Now/blob/master/fastlane/metadata/android/en-US/images/phoneScreenshots/3.png?raw=true)
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" width="214" height="419" />
 
 By long pressing on a band, there will be a popup menu for you to choose the band's colour.
 <hr />
 
 ## Download
-[Download the APK](https://github.com/ktprograms/Ohms_Now/blob/master/app/release/OhmsNow0.1.1beta.apk)
 
-## Checksums (All versions)
-**V 0.1.1 Beta:**
+[<img src="get-it-on-github.png"
+    alt="Get it on GitHub"
+    height="80">](https://github.com/ktprograms/Ohms_Now/releases/latest)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+    alt="Get it on F-Droid"
+    height="80">](https://f-droid.org/packages/com.ktprograms.ohmsnow/)
 
->MD5: 90be266aa3287360fab383f2c4e5288a
->
->SHA1: e825966e4bd1a2e8c85b6ad2f4e31db2f2f4adc3
+## License
 
-**V 0.1.0 Beta:**
+    Copyright (c) 2021 Toh Jeen Gie Keith
 
->MD5: 5dbba6f3b94e89e59ada468312562ed8
->
->SHA1: e52a55d499a5b4f56792d5dc7c70eee5abe2e08c
+    Ohms Now! is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
-# Changelogs
-**V 0.1.1 Beta:**
+    Ohms Now! is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
->Added support for dark mode.
->Added popup menu to choose band color on long click.
-
-**V 0.1.0 Beta:**
-
->Initial release
+    You should have received a copy of the GNU General Public License
+    along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.

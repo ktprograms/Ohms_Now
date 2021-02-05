@@ -26,11 +26,8 @@ import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
@@ -145,9 +142,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun bandClicked(m: MotionEvent, band: ImageButton): Boolean {
+        return Bitmap.createBitmap(band.drawingCache)
+            .getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT
+    }
+
     // Check if band 1 was clicked
     private fun checkBand1(m: MotionEvent): Boolean {
-        return if (Bitmap.createBitmap(band1.drawingCache).getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
+        return if (bandClicked(m, band1)) {
             touchedBand = 0
             true
         } else {
@@ -157,7 +159,7 @@ class MainActivity : AppCompatActivity() {
 
     // Check if band 2 was clicked
     private fun checkBand2(m: MotionEvent): Boolean {
-        return if (Bitmap.createBitmap(band2.drawingCache).getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
+        return if (bandClicked(m, band2)) {
             touchedBand = 1
             true
         } else {
@@ -167,7 +169,7 @@ class MainActivity : AppCompatActivity() {
 
     // Check if band 3 was clicked
     private fun checkBandMultiplier(m: MotionEvent): Boolean {
-        return if (Bitmap.createBitmap(bandMultiplier.drawingCache).getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
+        return if (bandClicked(m, bandMultiplier)) {
             touchedBand = 2
             true
         } else {
@@ -177,7 +179,7 @@ class MainActivity : AppCompatActivity() {
 
     // Check if the last band was clicked
     private fun checkBandLast(m: MotionEvent): Boolean {
-        return if (Bitmap.createBitmap(bandLast.drawingCache).getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
+        return if (bandClicked(m, bandLast)) {
             bandLastState = nextToleranceColor(bandLastState)
             bandLast.setColorFilter(bandLastState.argb)
             resistorBody.setColorFilter(decodeBodyColor().argb)

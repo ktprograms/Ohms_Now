@@ -22,8 +22,6 @@
 
 package com.ktprograms.ohmsnow
 
-import android.widget.ImageButton
-
 data class Band(var value: BandColors)
 
 data class MultiplierBand(var value: MultiplierBandColors)
