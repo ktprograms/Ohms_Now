@@ -1,0 +1,1 @@
+Added ability to swipe left/right to go to the previous/next E12/E24 value.

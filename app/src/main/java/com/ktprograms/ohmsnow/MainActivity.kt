@@ -33,6 +33,7 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import java.text.DecimalFormat
 import kotlin.math.floor
 import kotlin.math.log10
@@ -40,6 +41,7 @@ import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
     // View references
+    private lateinit var screen: ConstraintLayout
     private lateinit var resistorBody: ImageView
     private lateinit var band1: ImageButton
     private lateinit var band2: ImageButton
@@ -59,6 +61,54 @@ class MainActivity : AppCompatActivity() {
     // Had no long press
     private var hadNoLongPress = true
 
+    // X coordinate on ACTION_DOWN
+    private var previousX = 0F
+
+    // Minimum swipe amount
+    private val MIN_DISTANCE = 100
+
+    // E12 / E24 values
+    private val e12 = listOf(
+        Pair(1, 0),
+        Pair(1, 2),
+        Pair(1, 5),
+        Pair(1, 8),
+        Pair(2, 2),
+        Pair(2, 7),
+        Pair(3, 3),
+        Pair(3, 9),
+        Pair(4, 7),
+        Pair(5, 6),
+        Pair(6, 8),
+        Pair(8, 2)
+    )
+    private val e24 = listOf(
+        Pair(1, 0),
+        Pair(1, 1),
+        Pair(1, 2),
+        Pair(1, 3),
+        Pair(1, 5),
+        Pair(1, 6),
+        Pair(1, 8),
+        Pair(2, 0),
+        Pair(2, 2),
+        Pair(2, 4),
+        Pair(2, 7),
+        Pair(3, 0),
+        Pair(3, 3),
+        Pair(3, 6),
+        Pair(3, 9),
+        Pair(4, 3),
+        Pair(4, 7),
+        Pair(5, 1),
+        Pair(5, 6),
+        Pair(6, 2),
+        Pair(6, 8),
+        Pair(7, 5),
+        Pair(8, 2),
+        Pair(9, 1)
+    )
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,6 +124,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayUseLogoEnabled(true)
 
         // View references
+        screen = findViewById(R.id.screen)
         resistorBody = findViewById(R.id.resistor_body)
         ohmsTextView = findViewById(R.id.ohms_text_view)
         band1 = findViewById(R.id.band_1)
@@ -88,34 +139,75 @@ class MainActivity : AppCompatActivity() {
         bandLast.isDrawingCacheEnabled = true
 
         // On touch listener
-        bandLast.setOnTouchListener { _,m ->
+        screen.setOnTouchListener { _, m ->
             when (m.action) {
                 MotionEvent.ACTION_DOWN -> {
+                    touchedBand = -1
                     hadNoLongPress = true
                     if (!checkBandLast(m)) {
-                        if (!checkBandMultiplier(m)) {
-                            if (!checkBand2(m)) {
-                                if (!checkBand1(m)) {
-                                    touchedBand = -1
-                                }
+                        if (!bandClicked(m, bandMultiplier)) {
+                            if (!bandClicked(m, band2)) {
+                                bandClicked(m, band1)
                             }
                         }
                     }
+                    previousX = m.x
                 }
                 MotionEvent.ACTION_UP -> {
                     if (hadNoLongPress) {
                         when (touchedBand) {
-                            0 -> {
-                                nextColor(band1State)
-                            }
-                            1 -> {
-                                nextColor(band2State)
-                            }
-                            2 -> {
-                                nextMultiplierColor(bandMultiplierState)
+                            0 -> nextColor(band1State)
+                            1 -> nextColor(band2State)
+                            2 -> nextMultiplierColor(bandMultiplierState)
+                            -1 -> {
+                                if (previousX - m.x > MIN_DISTANCE) {
+                                    var goBackOne = false
+                                    val prevPair = when (bandLastState) {
+                                        ToleranceBandColors.SILVER -> {
+                                            try {
+                                                e12.dropLastWhile { (it.first > band1State.value.ordinal) or ((it.first == band1State.value.ordinal) and (it.second >= band2State.value.ordinal)) }.last()
+                                            } catch (e: NoSuchElementException) {
+                                                goBackOne = true
+                                                e12.last()
+                                            }
+                                        }
+                                        ToleranceBandColors.GOLD -> {
+                                            try {
+                                                e24.dropLastWhile { (it.first > band1State.value.ordinal) or ((it.first == band1State.value.ordinal) and (it.second >= band2State.value.ordinal)) }.last()
+                                            } catch (e: NoSuchElementException) {
+                                                goBackOne = true
+                                                e24.last()
+                                            }
+                                        }
+                                        else -> Pair(1, 0)
+                                    }
+                                    band1State.value = BandColors.values()[prevPair.first]
+                                    band2State.value = BandColors.values()[prevPair.second]
+                                    if (goBackOne) {
+                                        prevMultiplierColor(bandMultiplierState)
+                                    }
+                                } else if (m.x - previousX > MIN_DISTANCE) {
+                                    val nextPair = try {
+                                        when (bandLastState) {
+                                            ToleranceBandColors.SILVER -> {
+                                                e12.dropWhile { (it.first < band1State.value.ordinal) or ((it.first == band1State.value.ordinal) and (it.second <= band2State.value.ordinal)) }[0]
+                                            }
+                                            ToleranceBandColors.GOLD -> {
+                                                e24.dropWhile { (it.first < band1State.value.ordinal) or ((it.first == band1State.value.ordinal) and (it.second <= band2State.value.ordinal)) }[0]
+                                            }
+                                            else -> Pair(1, 0)
+                                        }
+                                    } catch (e: IndexOutOfBoundsException) {
+                                        Pair(1, 0)
+                                    }
+                                    band1State.value = BandColors.values()[nextPair.first]
+                                    band2State.value = BandColors.values()[nextPair.second]
+                                    if (nextPair == Pair(1, 0)) {
+                                        nextMultiplierColor(bandMultiplierState)
+                                    }
+                                }
                             }
                         }
-
                         updateAll()
                     }
                 }
@@ -125,54 +217,32 @@ class MainActivity : AppCompatActivity() {
         }
 
         // On long click listener
-        bandLast.setOnLongClickListener {
+        screen.setOnLongClickListener {
             hadNoLongPress = false
             when (touchedBand) {
-                0 -> {
-                    showBandPopup(band1, band1State)
-                }
-                1 -> {
-                    showBandPopup(band2, band2State)
-                }
-                2 -> {
-                    showMultiplierBandPopup(bandMultiplier, bandMultiplierState)
-                }
+                0 -> showBandPopup(band1, band1State)
+                1 -> showBandPopup(band2, band2State)
+                2 -> showMultiplierBandPopup(bandMultiplier, bandMultiplierState)
             }
-            false
+            true
         }
     }
 
     private fun bandClicked(m: MotionEvent, band: ImageButton): Boolean {
-        return Bitmap.createBitmap(band.drawingCache)
-            .getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT
-    }
-
-    // Check if band 1 was clicked
-    private fun checkBand1(m: MotionEvent): Boolean {
-        return if (bandClicked(m, band1)) {
-            touchedBand = 0
-            true
-        } else {
-            false
-        }
-    }
-
-    // Check if band 2 was clicked
-    private fun checkBand2(m: MotionEvent): Boolean {
-        return if (bandClicked(m, band2)) {
-            touchedBand = 1
-            true
-        } else {
-            false
-        }
-    }
-
-    // Check if band 3 was clicked
-    private fun checkBandMultiplier(m: MotionEvent): Boolean {
-        return if (bandClicked(m, bandMultiplier)) {
-            touchedBand = 2
-            true
-        } else {
+        return try {
+            if (Bitmap.createBitmap(band.drawingCache)
+                    .getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
+                touchedBand = when (band) {
+                    band1 -> 0
+                    band2 -> 1
+                    bandMultiplier -> 2
+                    else -> -1
+                }
+                true
+            } else {
+                false
+            }
+        } catch (e: IllegalArgumentException) {
             false
         }
     }
@@ -241,6 +311,20 @@ class MainActivity : AppCompatActivity() {
             MultiplierBandColors.GREEN -> MultiplierBandColors.BLUE
             MultiplierBandColors.BLUE -> MultiplierBandColors.VIOLET
             MultiplierBandColors.VIOLET -> MultiplierBandColors.BLACK
+            else -> MultiplierBandColors.BLACK
+        }
+    }
+
+    private fun prevMultiplierColor(multiplierBandState: MultiplierBand) {
+        multiplierBandState.value = when (multiplierBandState.value) {
+            MultiplierBandColors.VIOLET -> MultiplierBandColors.BLUE
+            MultiplierBandColors.BLUE -> MultiplierBandColors.GREEN
+            MultiplierBandColors.GREEN -> MultiplierBandColors.YELLOW
+            MultiplierBandColors.YELLOW -> MultiplierBandColors.ORANGE
+            MultiplierBandColors.ORANGE -> MultiplierBandColors.RED
+            MultiplierBandColors.RED -> MultiplierBandColors.BROWN
+            MultiplierBandColors.BROWN -> MultiplierBandColors.BLACK
+            MultiplierBandColors.BLACK -> MultiplierBandColors.VIOLET
             else -> MultiplierBandColors.BLACK
         }
     }

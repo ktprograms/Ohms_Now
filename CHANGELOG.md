@@ -1,5 +1,13 @@
 # Changelogs
 
+### V 0.1.2 Beta
+- Added ability to swipe left/right to go to the previous/next E12/E24 value.
+
+>MD5: d43a651aad222840d83375d3d906759c
+>
+>SHA1: d2bc62053fdd721dcc01425cff0ad5467fffbc04
+
+
 ### V 0.1.1 Beta
 - Added support for dark mode.
 - Added popup menu to choose band color on long click.
