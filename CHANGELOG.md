@@ -1,5 +1,13 @@
 # Changelogs
 
+### V 0.1.3 Beta
+- Added 3 and 5 band resistor support.
+
+>MD5: 82799120c8260f062fda1adffa37ee2a
+>
+>SHA1: 505f0d296f9ff5eef9efee23fc2769c18d295774
+
+
 ### V 0.1.2 Beta
 - Added ability to swipe left/right to go to the previous/next E12/E24 value.
 

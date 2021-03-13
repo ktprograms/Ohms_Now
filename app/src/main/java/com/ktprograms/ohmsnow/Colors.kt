@@ -22,10 +22,6 @@
 
 package com.ktprograms.ohmsnow
 
-data class Band(var value: BandColors)
-
-data class MultiplierBand(var value: MultiplierBandColors)
-
 enum class BandColors(val argb: Int) {
     BLACK(0xFF000000.toInt()),
     BROWN(0xFF964B00.toInt()),
@@ -56,11 +52,17 @@ enum class MultiplierBandColors(val argb: Int) {
 }
 
 enum class ToleranceBandColors(val argb: Int) {
+    NONE(0xFFFAD6A5.toInt()),
     SILVER(0xFFC0C0C0.toInt()),
     GOLD(0xFFD4AF37.toInt()),
     BROWN(0xFF964B00.toInt()),
+    RED(0xFFFF0000.toInt()),
+    ORANGE(0xFFFF7F50.toInt()),
+    YELLOW(0xFFFFFF00.toInt()),
     GREEN(0xFF32CD32.toInt()),
-    VIOLET(0xFF9400D3.toInt())
+    BLUE(0xFF0000FF.toInt()),
+    VIOLET(0xFF9400D3.toInt()),
+    GREY(0xFF808080.toInt()),
 }
 
 enum class BodyColors(val argb: Int) {

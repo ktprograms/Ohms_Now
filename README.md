@@ -12,7 +12,10 @@ Once you have set all the bands to match your resistor's colours, you can then r
 
 By long pressing on a band, there will be a popup menu for you to choose the band's colour.
 
-You can swipe left/right to go to the previous/next E12/E24 value.
+You can swipe left/right to go to the previous/next E series value.
+
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="214" height="419" />
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="214" height="419" />
 <hr />
 
 ## Download
