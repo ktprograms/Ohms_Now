@@ -1,0 +1,1 @@
+BUGFIX: Fixed extra band being visible even in 4 band mode when the app starts.

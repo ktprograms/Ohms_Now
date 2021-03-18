@@ -1,5 +1,13 @@
 # Changelogs
 
+### V 0.1.4 Beta
+- BUGFIX: Fixed extra band being visible even in 4 band mode when the app starts.
+
+>MD5: 4e5de4b8c68fcf940450f6650002e3f0
+>
+>SHA1: 676bdc0d52bd3923c8028a9b615ebe2d932975fe
+
+
 ### V 0.1.3 Beta
 - Added 3 and 5 band resistor support.
 

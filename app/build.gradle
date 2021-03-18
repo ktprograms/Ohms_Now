@@ -33,8 +33,8 @@ android {
         applicationId "com.ktprograms.ohmsnow"
         minSdkVersion 16
         targetSdkVersion 30
-        versionCode 4
-        versionName "v0.1.3-beta"
+        versionCode 5
+        versionName "v0.1.4-beta"
 
         vectorDrawables.useSupportLibrary true
     }
