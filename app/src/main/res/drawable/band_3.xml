@@ -27,13 +27,8 @@
     android:viewportWidth="200.0"
     android:viewportHeight="110.0">
 
-    <!--<path android:fillColor="#FFFF0000"
+    <path android:fillColor="@color/red"
         android:strokeWidth="0"
-        android:strokeColor="#00000000"
-        android:pathData="M80,31  L95,31  L95,79  L80,79  Z" />-->
-
-    <path android:fillColor="#FFFF0000"
-        android:strokeWidth="0"
-        android:strokeColor="#00000000"
+        android:strokeColor="@android:color/transparent"
         android:pathData="M75,31  L90,31  L90,79  L75,79  Z" />
 </vector>

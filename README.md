@@ -16,6 +16,10 @@ You can swipe left/right to go to the previous/next E series value.
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" width="214" height="419" />
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" width="214" height="419" />
+
+When in 5 band mode, tapping the '6' icon in the top right will enter into 6 band mode. Tapping the icon (which will have changed to a '5' icon) again will go back to 5 band mode.
+
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="214" height="419" />
 <hr />
 
 ## Download

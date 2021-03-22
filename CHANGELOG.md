@@ -1,5 +1,12 @@
 # Changelogs
 
+### V 0.1.5 Beta
+- Added support for 6 band resistors.
+
+>MD5: 6397213d8512015a98e86bc3f4cce077
+>
+>SHA1: 025936325afb16697f5177aba48e16e1c8d51ed1
+
 ### V 0.1.4 Beta
 - BUGFIX: Fixed extra band being visible even in 4 band mode when the app starts.
 

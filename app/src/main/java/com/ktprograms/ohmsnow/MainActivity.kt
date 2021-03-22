@@ -27,6 +27,8 @@ import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ImageButton
@@ -50,7 +52,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var band3: ImageButton
     private lateinit var bandMultiplier: ImageButton
     private lateinit var bandTolerance: ImageButton
+    private lateinit var bandTempCoef: ImageButton
     private lateinit var ohmsTextView: TextView
+
+    // Menu reference
+    private lateinit var menu: Menu
 
     // Band color states
     private var band1State = BandColors.BLUE
@@ -58,6 +64,7 @@ class MainActivity : AppCompatActivity() {
     private var band3State = BandColors.GREEN
     private var bandMultiplierState = MultiplierBandColors.RED
     private var bandToleranceState = ToleranceBandColors.GOLD
+    private var bandTempCoefState = TempCoefBandColors.BLACK
 
     // Touched band
     private var touchedBand: Int = -1
@@ -71,8 +78,11 @@ class MainActivity : AppCompatActivity() {
     // Minimum swipe amount
     private val MIN_DISTANCE = 100
 
-    // Is the app in 5 band mode?
-    private var fiveBands = false
+    // In higher tolerance mode?
+    private var fiveSixBands = false
+
+    // In six band mode?
+    private var sixBands = false
 
     @SuppressLint("ClickableViewAccessibility", "CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,10 +105,13 @@ class MainActivity : AppCompatActivity() {
         band1 = findViewById(R.id.band_1)
         band2 = findViewById(R.id.band_2)
         bandMultiplier = findViewById(R.id.band_3)
-        bandTolerance = findViewById(R.id.band_5)
+        bandTolerance = findViewById(R.id.band_6)
 
         // On 5/6 band resistors, val band3 is R.id.band_3 and val bandMultiplier is R.id.band4
         band3 = findViewById(R.id.band_3)
+
+        // On 6 band resistors, val bandTempCoef is R.id.band6 and val bandTolerance is R.id.band5
+        bandTempCoef = findViewById(R.id.band_6)
 
         // Needed to get the bitmaps later
         band1.isDrawingCacheEnabled = true
@@ -106,6 +119,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.band_4).isDrawingCacheEnabled = true
         bandMultiplier.isDrawingCacheEnabled = true
         bandTolerance.isDrawingCacheEnabled = true
+        findViewById<ImageButton>(R.id.band_5).isDrawingCacheEnabled = true
 
         // On touch listener
         screen.setOnTouchListener { _, m ->
@@ -114,10 +128,12 @@ class MainActivity : AppCompatActivity() {
                     touchedBand = -1
                     hadNoLongPress = true
                     if (!bandClicked(m, bandTolerance)) {
-                        if (!bandClicked(m, bandMultiplier)) {
-                            if (!bandClicked(m, band3)) {
-                                if (!bandClicked(m, band2)) {
-                                    bandClicked(m, band1)
+                        if (!bandClicked(m, bandTempCoef)) {
+                            if (!bandClicked(m, bandMultiplier)) {
+                                if (!bandClicked(m, band3)) {
+                                    if (!bandClicked(m, band2)) {
+                                        bandClicked(m, band1)
+                                    }
                                 }
                             }
                         }
@@ -131,10 +147,11 @@ class MainActivity : AppCompatActivity() {
                             1 -> band2State = nextColor(band2State)
                             2 -> band3State = nextColor(band3State)
                             3 -> bandMultiplierState = nextMultiplierColor(bandMultiplierState)
-                            4 -> bandToleranceState = nextToleranceColor(bandToleranceState)
+                            4 -> bandTempCoefState = nextTempCoefColor(bandTempCoefState)
+                            5 -> bandToleranceState = nextToleranceColor(bandToleranceState)
                             -1 -> {
                                 if (previousX - m.x > MIN_DISTANCE) {
-                                    if (!fiveBands) {
+                                    if (!fiveSixBands) {
                                         val prevPair = when (bandToleranceState) {
                                             ToleranceBandColors.NONE -> e6
                                             ToleranceBandColors.SILVER -> e12
@@ -168,7 +185,7 @@ class MainActivity : AppCompatActivity() {
                                         band3State = BandColors.values()[prevTriple.third]
                                     }
                                 } else if (m.x - previousX > MIN_DISTANCE) {
-                                    if (!fiveBands) {
+                                    if (!fiveSixBands) {
                                         val nextPair = try {
                                             when (bandToleranceState) {
                                                 ToleranceBandColors.NONE -> e6
@@ -215,28 +232,34 @@ class MainActivity : AppCompatActivity() {
                 0 -> showBandPopup(band1, band1State, object: BandCallback {
                     override fun onCallback(returnBandState: BandColors) {
                         band1State = returnBandState
-                        update(band1, band1State)
+                        updateAll()
                     }
                 })
                 1 -> showBandPopup(band2, band2State, object: BandCallback {
                     override fun onCallback(returnBandState: BandColors) {
                         band2State = returnBandState
-                        update(band2, band2State)
+                        updateAll()
                     }
                 })
                 2 -> showBandPopup(band3, band3State, object: BandCallback {
                     override fun onCallback(returnBandState: BandColors) {
                         band3State = returnBandState
-                        update(band3, band3State)
+                        updateAll()
                     }
                 })
                 3 -> showMultiplierBandPopup(bandMultiplier, bandMultiplierState, object: MultiplierBandCallback {
                     override fun onCallback(returnBandState: MultiplierBandColors) {
                         bandMultiplierState = returnBandState
-                        update(bandMultiplier, bandMultiplierState)
+                        updateAll()
                     }
                 })
-                4 -> showToleranceBandPopup(bandTolerance, bandToleranceState, object: ToleranceBandCallback {
+                4 -> showTempCoefBandPopup(bandTempCoef, bandTempCoefState, object : TempCoefBandCallback {
+                    override fun onCallback(returnBandState: TempCoefBandColors) {
+                        bandTempCoefState = returnBandState
+                        updateAll()
+                    }
+                })
+                5 -> showToleranceBandPopup(bandTolerance, bandToleranceState, object: ToleranceBandCallback {
                     override fun onCallback(returnBandState: ToleranceBandColors) {
                         bandToleranceState = returnBandState
                         updateAll()
@@ -252,8 +275,12 @@ class MainActivity : AppCompatActivity() {
         return try {
             if (Bitmap.createBitmap(band.drawingCache)
                     .getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
-                if (!fiveBands and (band == band3)) {
+                if (!fiveSixBands and (band == band3)) {
                     touchedBand = 3
+                    return false
+                }
+                if (!(fiveSixBands and sixBands) and (band == bandTempCoef)) {
+                    touchedBand = 5
                     return false
                 }
                 touchedBand = when (band) {
@@ -261,7 +288,8 @@ class MainActivity : AppCompatActivity() {
                     band2 -> 1
                     band3 -> 2
                     bandMultiplier -> 3
-                    bandTolerance -> 4
+                    bandTempCoef -> 4
+                    bandTolerance -> 5
                     else -> -1
                 }
                 true
@@ -276,10 +304,10 @@ class MainActivity : AppCompatActivity() {
     // Convert band color states to a string to display
     @SuppressLint("SetTextI18n")
     private fun decodeOhms() {
-        var ohms = if (!fiveBands) {
+        var ohms = if (!fiveSixBands) {
             (((band1State.ordinal * 10) + band2State.ordinal) * (10.0.pow(bandMultiplierState.ordinal - 3)))
         } else {
-            (((band1State.ordinal * 100) + (band2State.ordinal * 10) + band3State.ordinal) * (10.0.pow(bandMultiplierState.ordinal - 4)))
+            (((band1State.ordinal * 100) + (band2State.ordinal * 10) + band3State.ordinal) * (10.0.pow(bandMultiplierState.ordinal - 3)))
         }
         val multiplier =
             when (floor(log10(ohms)) + 1) {
@@ -313,57 +341,81 @@ class MainActivity : AppCompatActivity() {
                 ToleranceBandColors.VIOLET -> "0.1"
                 ToleranceBandColors.GREY -> "0.01"
             }
-        ohmsTextView.text = "${DecimalFormat("0.###").format(ohms)} ${multiplier}Ω ±${tolerance}%"
+        val tempCoef =
+            when (bandTempCoefState) {
+                TempCoefBandColors.BLACK -> "250"
+                TempCoefBandColors.BROWN -> "100"
+                TempCoefBandColors.RED -> "50"
+                TempCoefBandColors.ORANGE -> "15"
+                TempCoefBandColors.YELLOW -> "25"
+                TempCoefBandColors.GREEN -> "20"
+                TempCoefBandColors.BLUE -> "10"
+                TempCoefBandColors.VIOLET -> "5"
+                TempCoefBandColors.GREY -> "1"
+            }
+        if (fiveSixBands and sixBands) {
+            ohmsTextView.text =
+                "${DecimalFormat("0.###").format(ohms)} ${multiplier}Ω ±${tolerance}%\n${tempCoef}ppm/K"
+        } else {
+            ohmsTextView.text =
+                "${DecimalFormat("0.###").format(ohms)} ${multiplier}Ω ±${tolerance}%"
+        }
     }
 
     // Cycle through colors
     private fun nextColor(bandState: BandColors): BandColors =
-            try {
-                BandColors.values()[bandState.ordinal + 1]
-            } catch (e: ArrayIndexOutOfBoundsException) {
-                BandColors.values().first()
-            }
+        try {
+            BandColors.values()[bandState.ordinal + 1]
+        } catch (e: ArrayIndexOutOfBoundsException) {
+            BandColors.values().first()
+        }
     private fun nextMultiplierColor(multiplierBandState: MultiplierBandColors): MultiplierBandColors =
-            when (multiplierBandState) {
-                MultiplierBandColors.BLACK -> MultiplierBandColors.BROWN
-                MultiplierBandColors.BROWN -> MultiplierBandColors.RED
-                MultiplierBandColors.RED -> MultiplierBandColors.ORANGE
-                MultiplierBandColors.ORANGE -> MultiplierBandColors.YELLOW
-                MultiplierBandColors.YELLOW -> MultiplierBandColors.GREEN
-                MultiplierBandColors.GREEN -> MultiplierBandColors.BLUE
-                MultiplierBandColors.BLUE -> MultiplierBandColors.VIOLET
-                MultiplierBandColors.VIOLET -> MultiplierBandColors.BLACK
-                else -> MultiplierBandColors.BLACK
-            }
+        when (multiplierBandState) {
+            MultiplierBandColors.BLACK -> MultiplierBandColors.BROWN
+            MultiplierBandColors.BROWN -> MultiplierBandColors.RED
+            MultiplierBandColors.RED -> MultiplierBandColors.ORANGE
+            MultiplierBandColors.ORANGE -> MultiplierBandColors.YELLOW
+            MultiplierBandColors.YELLOW -> MultiplierBandColors.GREEN
+            MultiplierBandColors.GREEN -> MultiplierBandColors.BLUE
+            MultiplierBandColors.BLUE -> MultiplierBandColors.VIOLET
+            MultiplierBandColors.VIOLET -> MultiplierBandColors.BLACK
+            else -> MultiplierBandColors.BLACK
+        }
     private fun prevMultiplierColor(multiplierBandState: MultiplierBandColors): MultiplierBandColors =
-            when (multiplierBandState) {
-                MultiplierBandColors.VIOLET -> MultiplierBandColors.BLUE
-                MultiplierBandColors.BLUE -> MultiplierBandColors.GREEN
-                MultiplierBandColors.GREEN -> MultiplierBandColors.YELLOW
-                MultiplierBandColors.YELLOW -> MultiplierBandColors.ORANGE
-                MultiplierBandColors.ORANGE -> MultiplierBandColors.RED
-                MultiplierBandColors.RED -> MultiplierBandColors.BROWN
-                MultiplierBandColors.BROWN -> MultiplierBandColors.BLACK
-                MultiplierBandColors.BLACK -> MultiplierBandColors.VIOLET
-                else -> MultiplierBandColors.BLACK
-            }
+        when (multiplierBandState) {
+            MultiplierBandColors.VIOLET -> MultiplierBandColors.BLUE
+            MultiplierBandColors.BLUE -> MultiplierBandColors.GREEN
+            MultiplierBandColors.GREEN -> MultiplierBandColors.YELLOW
+            MultiplierBandColors.YELLOW -> MultiplierBandColors.ORANGE
+            MultiplierBandColors.ORANGE -> MultiplierBandColors.RED
+            MultiplierBandColors.RED -> MultiplierBandColors.BROWN
+            MultiplierBandColors.BROWN -> MultiplierBandColors.BLACK
+            MultiplierBandColors.BLACK -> MultiplierBandColors.VIOLET
+            else -> MultiplierBandColors.BLACK
+        }
+    private fun nextTempCoefColor(tempCoefBandState: TempCoefBandColors): TempCoefBandColors =
+        try {
+            TempCoefBandColors.values()[tempCoefBandState.ordinal + 1]
+        } catch (e: ArrayIndexOutOfBoundsException) {
+            TempCoefBandColors.values().first()
+        }
     private fun nextToleranceColor(toleranceBandState: ToleranceBandColors): ToleranceBandColors =
-            when (toleranceBandState) {
-                ToleranceBandColors.NONE -> ToleranceBandColors.SILVER
-                ToleranceBandColors.SILVER -> ToleranceBandColors.GOLD
-                ToleranceBandColors.GOLD -> ToleranceBandColors.BROWN
-                ToleranceBandColors.BROWN -> ToleranceBandColors.RED
-                ToleranceBandColors.RED -> ToleranceBandColors.GREEN
-                ToleranceBandColors.GREEN -> ToleranceBandColors.NONE
-                else -> ToleranceBandColors.NONE
-            }
+        when (toleranceBandState) {
+            ToleranceBandColors.NONE -> ToleranceBandColors.SILVER
+            ToleranceBandColors.SILVER -> ToleranceBandColors.GOLD
+            ToleranceBandColors.GOLD -> ToleranceBandColors.BROWN
+            ToleranceBandColors.BROWN -> ToleranceBandColors.RED
+            ToleranceBandColors.RED -> ToleranceBandColors.GREEN
+            ToleranceBandColors.GREEN -> ToleranceBandColors.NONE
+            else -> ToleranceBandColors.NONE
+        }
 
     // Should the body be beige or blue (based on tolerance setting)?
     private fun decodeBodyColor(): BodyColors =
-            when (bandToleranceState) {
-                ToleranceBandColors.NONE, ToleranceBandColors.SILVER, ToleranceBandColors.GOLD -> BodyColors.BEIGE
-                else -> BodyColors.BLUE
-            }
+        when (bandToleranceState) {
+            ToleranceBandColors.NONE, ToleranceBandColors.SILVER, ToleranceBandColors.GOLD -> BodyColors.BEIGE
+            else -> BodyColors.BLUE
+        }
 
     // Show popup menu on view
     private fun showBandPopup(band: ImageButton, bandState: BandColors, c: BandCallback) {
@@ -372,16 +424,16 @@ class MainActivity : AppCompatActivity() {
 
         popup.setOnMenuItemClickListener {
             val returnBandState = when (it!!.itemId) {
-                R.id.bandBlack -> BandColors.BLACK
-                R.id.bandBrown -> BandColors.BROWN
-                R.id.bandRed -> BandColors.RED
-                R.id.bandOrange -> BandColors.ORANGE
-                R.id.bandYellow -> BandColors.YELLOW
-                R.id.bandGreen -> BandColors.GREEN
-                R.id.bandBlue -> BandColors.BLUE
-                R.id.bandViolet -> BandColors.VIOLET
-                R.id.bandGrey -> BandColors.GREY
-                R.id.bandWhite -> BandColors.WHITE
+                R.id.band_black -> BandColors.BLACK
+                R.id.band_brown -> BandColors.BROWN
+                R.id.band_red -> BandColors.RED
+                R.id.band_orange -> BandColors.ORANGE
+                R.id.band_yellow -> BandColors.YELLOW
+                R.id.band_green -> BandColors.GREEN
+                R.id.band_blue -> BandColors.BLUE
+                R.id.band_violet -> BandColors.VIOLET
+                R.id.band_grey -> BandColors.GREY
+                R.id.band_white -> BandColors.WHITE
                 else -> bandState
             }
             c.onCallback(returnBandState)
@@ -392,23 +444,72 @@ class MainActivity : AppCompatActivity() {
     }
     private fun showMultiplierBandPopup(band: ImageButton, bandState: MultiplierBandColors, c: MultiplierBandCallback) {
         val popup = PopupMenu(this, band)
-        popup.inflate(R.menu.multiplier_band_numbers)
+
+        if (!fiveSixBands) {
+            popup.inflate(R.menu.multiplier_band_numbers_3_4_band)
+
+            popup.setOnMenuItemClickListener {
+                val returnBandState = when (it!!.itemId) {
+                    R.id.multiplier_band_pink_3_4_band -> MultiplierBandColors.PINK
+                    R.id.multiplier_band_sliver_3_4_band -> MultiplierBandColors.SILVER
+                    R.id.multiplier_band_gold_3_4_band -> MultiplierBandColors.GOLD
+                    R.id.multiplier_band_black_3_4_band -> MultiplierBandColors.BLACK
+                    R.id.multiplier_band_brown_3_4_band -> MultiplierBandColors.BROWN
+                    R.id.multiplier_band_red_3_4_band -> MultiplierBandColors.RED
+                    R.id.multiplier_band_orange_3_4_band -> MultiplierBandColors.ORANGE
+                    R.id.multiplier_band_yellow_3_4_band -> MultiplierBandColors.YELLOW
+                    R.id.multiplier_band_green_3_4_band -> MultiplierBandColors.GREEN
+                    R.id.multiplier_band_blue_3_4_band -> MultiplierBandColors.BLUE
+                    R.id.multiplier_band_violet_3_4_band -> MultiplierBandColors.VIOLET
+                    R.id.multiplier_band_grey_3_4_band -> MultiplierBandColors.GREY
+                    R.id.multiplier_band_white_3_4_band -> MultiplierBandColors.WHITE
+                    else -> bandState
+                }
+                c.onCallback(returnBandState)
+                true
+            }
+        } else {
+            popup.inflate(R.menu.multiplier_band_numbers_5_6_band)
+
+            popup.setOnMenuItemClickListener {
+                val returnBandState = when (it!!.itemId) {
+                    R.id.multiplier_band_pink_5_6_band -> MultiplierBandColors.PINK
+                    R.id.multiplier_band_sliver_5_6_band -> MultiplierBandColors.SILVER
+                    R.id.multiplier_band_gold_5_6_band -> MultiplierBandColors.GOLD
+                    R.id.multiplier_band_black_5_6_band -> MultiplierBandColors.BLACK
+                    R.id.multiplier_band_brown_5_6_band -> MultiplierBandColors.BROWN
+                    R.id.multiplier_band_red_5_6_band -> MultiplierBandColors.RED
+                    R.id.multiplier_band_orange_5_6_band -> MultiplierBandColors.ORANGE
+                    R.id.multiplier_band_yellow_5_6_band -> MultiplierBandColors.YELLOW
+                    R.id.multiplier_band_green_5_6_band -> MultiplierBandColors.GREEN
+                    R.id.multiplier_band_blue_5_6_band -> MultiplierBandColors.BLUE
+                    R.id.multiplier_band_violet_5_6_band -> MultiplierBandColors.VIOLET
+                    R.id.multiplier_band_grey_5_6_band -> MultiplierBandColors.GREY
+                    R.id.multiplier_band_white_5_6_band -> MultiplierBandColors.WHITE
+                    else -> bandState
+                }
+                c.onCallback(returnBandState)
+                true
+            }
+        }
+
+        popup.show()
+    }
+    private fun showTempCoefBandPopup(band: ImageButton, bandState: TempCoefBandColors, c: TempCoefBandCallback) {
+        val popup = PopupMenu(this, band)
+        popup.inflate(R.menu.temp_coef_band_numbers)
 
         popup.setOnMenuItemClickListener {
             val returnBandState = when (it!!.itemId) {
-                R.id.multiplierBandPink -> MultiplierBandColors.PINK
-                R.id.multiplierBandSliver -> MultiplierBandColors.SILVER
-                R.id.multiplierBandGold -> MultiplierBandColors.GOLD
-                R.id.multiplierBandBlack -> MultiplierBandColors.BLACK
-                R.id.multiplierBandBrown -> MultiplierBandColors.BROWN
-                R.id.multiplierBandRed -> MultiplierBandColors.RED
-                R.id.multiplierBandOrange -> MultiplierBandColors.ORANGE
-                R.id.multiplierBandYellow -> MultiplierBandColors.YELLOW
-                R.id.multiplierBandGreen -> MultiplierBandColors.GREEN
-                R.id.multiplierBandBlue -> MultiplierBandColors.BLUE
-                R.id.multiplierBandViolet -> MultiplierBandColors.VIOLET
-                R.id.multiplierBandGrey -> MultiplierBandColors.GREY
-                R.id.multiplierBandWhite -> MultiplierBandColors.WHITE
+                R.id.temp_coef_band_black -> TempCoefBandColors.BLACK
+                R.id.temp_coef_band_brown -> TempCoefBandColors.BROWN
+                R.id.temp_coef_band_red -> TempCoefBandColors.RED
+                R.id.temp_coef_band_orange -> TempCoefBandColors.ORANGE
+                R.id.temp_coef_band_yellow -> TempCoefBandColors.YELLOW
+                R.id.temp_coef_band_green -> TempCoefBandColors.GREEN
+                R.id.temp_coef_band_blue -> TempCoefBandColors.BLUE
+                R.id.temp_coef_band_violet -> TempCoefBandColors.VIOLET
+                R.id.temp_coef_band_grey -> TempCoefBandColors.GREY
                 else -> bandState
             }
             c.onCallback(returnBandState)
@@ -423,17 +524,17 @@ class MainActivity : AppCompatActivity() {
 
         popup.setOnMenuItemClickListener {
             val returnBandState = when (it!!.itemId) {
-                R.id.toleranceBandNone -> ToleranceBandColors.NONE
-                R.id.toleranceBandSliver -> ToleranceBandColors.SILVER
-                R.id.toleranceBandGold -> ToleranceBandColors.GOLD
-                R.id.toleranceBandBrown -> ToleranceBandColors.BROWN
-                R.id.toleranceBandRed -> ToleranceBandColors.RED
-                R.id.toleranceBandOrange -> ToleranceBandColors.ORANGE
-                R.id.toleranceBandYellow -> ToleranceBandColors.YELLOW
-                R.id.toleranceBandGreen -> ToleranceBandColors.GREEN
-                R.id.toleranceBandBlue -> ToleranceBandColors.BLUE
-                R.id.toleranceBandViolet -> ToleranceBandColors.VIOLET
-                R.id.toleranceBandGrey -> ToleranceBandColors.GREY
+                R.id.tolerance_band_none -> ToleranceBandColors.NONE
+                R.id.tolerance_band_sliver -> ToleranceBandColors.SILVER
+                R.id.tolerance_band_gold -> ToleranceBandColors.GOLD
+                R.id.tolerance_band_brown -> ToleranceBandColors.BROWN
+                R.id.tolerance_band_red -> ToleranceBandColors.RED
+                R.id.tolerance_band_orange -> ToleranceBandColors.ORANGE
+                R.id.tolerance_band_yellow -> ToleranceBandColors.YELLOW
+                R.id.tolerance_band_green -> ToleranceBandColors.GREEN
+                R.id.tolerance_band_blue -> ToleranceBandColors.BLUE
+                R.id.tolerance_band_violet -> ToleranceBandColors.VIOLET
+                R.id.tolerance_band_grey -> ToleranceBandColors.GREY
                 else -> bandState
             }
             c.onCallback(returnBandState)
@@ -444,18 +545,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     // Update bands and text
-    private fun update(band: ImageButton, bandState: BandColors) {
+    private fun updateBand(band: ImageButton, bandState: BandColors) {
         band.setColorFilter(bandState.argb)
-        decodeOhms()
     }
-    private fun update(band: ImageButton, bandState: MultiplierBandColors) {
-        band.setColorFilter(bandState.argb)
-        decodeOhms()
+    private fun updateBandMultiplier() {
+        bandMultiplier.setColorFilter(bandMultiplierState.argb)
     }
-    private fun update(band: ImageButton, bandState: ToleranceBandColors) {
-        band.setColorFilter(bandState.argb)
-        resistorBody.setColorFilter(decodeBodyColor().argb)
-
+    private fun updateBandTempCoef() {
+        if (fiveSixBands and sixBands) {
+            bandTempCoef.setColorFilter(bandTempCoefState.argb)
+        }
+    }
+    private fun updateBandTolerance() {
         when (bandToleranceState) {
             ToleranceBandColors.NONE, ToleranceBandColors.SILVER, ToleranceBandColors.GOLD -> {
                 // On 5/6 band resistors, val band3 is R.id.band_3 and val bandMultiplier is R.id.band4
@@ -463,26 +564,44 @@ class MainActivity : AppCompatActivity() {
                     bandMultiplier.visibility = View.INVISIBLE
                     bandMultiplier = findViewById(R.id.band_3)
                 }
-                fiveBands = false
+                fiveSixBands = false
+                menu.findItem(R.id.num_bands).isVisible = false
             }
             else -> {
                 // On 5/6 band resistors, val band3 is R.id.band_3 and val bandMultiplier is R.id.band4
                 bandMultiplier = findViewById(R.id.band_4)
                 bandMultiplier.visibility = View.VISIBLE
-                fiveBands = true
+                fiveSixBands = true
+                menu.findItem(R.id.num_bands).isVisible = true
             }
         }
 
-        decodeOhms()
+        if (sixBands and fiveSixBands) {
+            // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
+            bandTolerance = findViewById(R.id.band_5)
+            bandTolerance.visibility = View.VISIBLE
+        } else {
+            // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
+            if (bandTolerance == findViewById(R.id.band_5)) {
+                bandTolerance.visibility = View.INVISIBLE
+                bandTolerance = findViewById(R.id.band_6)
+            }
+        }
+
+        bandTolerance.setColorFilter(bandToleranceState.argb)
+        resistorBody.setColorFilter(decodeBodyColor().argb)
     }
 
     // Update all bands and texts
     private fun updateAll() {
-        update(bandTolerance, bandToleranceState)
-        update(band1, band1State)
-        update(band2, band2State)
-        update(band3, band3State)
-        update(bandMultiplier, bandMultiplierState)
+        updateBandTolerance()
+        updateBand(band1, band1State)
+        updateBand(band2, band2State)
+        updateBand(band3, band3State)
+        updateBandMultiplier()
+        updateBandTempCoef()
+
+        decodeOhms()
     }
 
     // Interfaces for callback on setOnMenuItemClickListener
@@ -492,7 +611,47 @@ class MainActivity : AppCompatActivity() {
     private interface MultiplierBandCallback {
         fun onCallback(returnBandState: MultiplierBandColors)
     }
+    private interface TempCoefBandCallback {
+        fun onCallback(returnBandState: TempCoefBandColors)
+    }
     private interface ToleranceBandCallback {
         fun onCallback(returnBandState: ToleranceBandColors)
+    }
+
+    // Initialize the menu
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        this.menu = menu!!
+        menuInflater.inflate(R.menu.app_bar_menu, this.menu)
+        this.menu.findItem(R.id.num_bands).isVisible = false
+        return true
+    }
+
+    // On menu item selected
+    @SuppressLint("UseCompatLoadingForDrawables")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.num_bands -> {
+                if (!sixBands) {
+                    sixBands = true
+                    menu.findItem(R.id.num_bands).icon = resources.getDrawable(R.drawable.icon_5)
+
+                    // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
+                    bandTolerance = findViewById(R.id.band_5)
+                    bandTolerance.visibility = View.VISIBLE
+                } else {
+                    sixBands = false
+                    menu.findItem(R.id.num_bands).icon = resources.getDrawable(R.drawable.icon_6)
+
+                    // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
+                    if (bandTolerance == findViewById(R.id.band_5)) {
+                        bandTolerance.visibility = View.INVISIBLE
+                        bandTolerance = findViewById(R.id.band_6)
+                    }
+                }
+                updateAll()
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+        return true
     }
 }

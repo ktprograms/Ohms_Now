@@ -24,42 +24,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/band_black"
-        android:title="0    Black" />
+        android:id="@+id/temp_coef_band_black"
+        android:title="250 ppm/K    Black" />
 
     <item
-        android:id="@+id/band_brown"
-        android:title="1    Brown" />
+        android:id="@+id/temp_coef_band_brown"
+        android:title="100 ppm/K    Brown" />
 
     <item
-        android:id="@+id/band_red"
-        android:title="2    Red" />
+        android:id="@+id/temp_coef_band_red"
+        android:title="50 ppm/K    Red" />
 
     <item
-        android:id="@+id/band_orange"
-        android:title="3    Orange" />
+        android:id="@+id/temp_coef_band_orange"
+        android:title="15 ppm/K    Orange" />
 
     <item
-        android:id="@+id/band_yellow"
-        android:title="4    Yellow" />
+        android:id="@+id/temp_coef_band_yellow"
+        android:title="25 ppm/K    Yellow" />
 
     <item
-        android:id="@+id/band_green"
-        android:title="5    Green" />
+        android:id="@+id/temp_coef_band_green"
+        android:title="20 ppm/K    Green" />
 
     <item
-        android:id="@+id/band_blue"
-        android:title="6    Blue" />
+        android:id="@+id/temp_coef_band_blue"
+        android:title="10 ppm/K    Blue" />
 
     <item
-        android:id="@+id/band_violet"
-        android:title="7    Violet" />
+        android:id="@+id/temp_coef_band_violet"
+        android:title="5 ppm/K    Violet" />
 
     <item
-        android:id="@+id/band_grey"
-        android:title="8    Grey" />
-
-    <item
-        android:id="@+id/band_white"
-        android:title="9    White" />
+        android:id="@+id/temp_coef_band_grey"
+        android:title="1 ppm/K    Grey" />
 </menu>

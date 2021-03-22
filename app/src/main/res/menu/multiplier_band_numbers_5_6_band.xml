@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ GNU General Public License v3.0
+  ~
+  ~ Copyright (c) 2021 Toh Jeen Gie Keith
+  ~
+  ~
+  ~ This file is part of Ohms Now!.
+  ~
+  ~ Ohms Now! is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Ohms Now! is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/multiplier_band_pink_5_6_band"
+        android:title="0.xxx Ω    Pink" />
+
+    <item
+        android:id="@+id/multiplier_band_sliver_5_6_band"
+        android:title="x.xx Ω    Silver" />
+
+    <item
+        android:id="@+id/multiplier_band_gold_5_6_band"
+        android:title="xx.x Ω    Gold" />
+
+    <item
+        android:id="@+id/multiplier_band_black_5_6_band"
+        android:title="xxx Ω    Black" />
+
+    <item
+        android:id="@+id/multiplier_band_brown_5_6_band"
+        android:title="x.xx KΩ    Brown" />
+
+    <item
+        android:id="@+id/multiplier_band_red_5_6_band"
+        android:title="xx.x KΩ    Red" />
+
+    <item
+        android:id="@+id/multiplier_band_orange_5_6_band"
+        android:title="xxx KΩ    Orange" />
+
+    <item
+        android:id="@+id/multiplier_band_yellow_5_6_band"
+        android:title="x.xx MΩ    Yellow" />
+
+    <item
+        android:id="@+id/multiplier_band_green_5_6_band"
+        android:title="xx.x MΩ    Green" />
+
+    <item
+        android:id="@+id/multiplier_band_blue_5_6_band"
+        android:title="xxx MΩ    Blue" />
+
+    <item
+        android:id="@+id/multiplier_band_violet_5_6_band"
+        android:title="x.xx GΩ    Violet" />
+
+    <item
+        android:id="@+id/multiplier_band_grey_5_6_band"
+        android:title="xx.x GΩ    Grey" />
+
+    <item
+        android:id="@+id/multiplier_band_white_5_6_band"
+        android:title="xxx GΩ    White" />
+</menu>

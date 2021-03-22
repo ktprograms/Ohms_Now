@@ -69,3 +69,15 @@ enum class BodyColors(val argb: Int) {
     BEIGE(0xFFFAD6A5.toInt()),
     BLUE(0xFF00BFFF.toInt())
 }
+
+enum class TempCoefBandColors(val argb: Int) {
+    BLACK(0xFF000000.toInt()),
+    BROWN(0xFF964B00.toInt()),
+    RED(0xFFFF0000.toInt()),
+    ORANGE(0xFFFF7F50.toInt()),
+    YELLOW(0xFFFFFF00.toInt()),
+    GREEN(0xFF32CD32.toInt()),
+    BLUE(0xFF0000FF.toInt()),
+    VIOLET(0xFF9400D3.toInt()),
+    GREY(0xFF808080.toInt())
+}

@@ -25,46 +25,46 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/toleranceBandNone"
+        android:id="@+id/tolerance_band_none"
         android:title="20%    None" />
 
     <item
-        android:id="@+id/toleranceBandSliver"
+        android:id="@+id/tolerance_band_sliver"
         android:title="10%    Silver" />
 
     <item
-        android:id="@+id/toleranceBandGold"
+        android:id="@+id/tolerance_band_gold"
         android:title="5%    Gold" />
 
     <item
-        android:id="@+id/toleranceBandBrown"
+        android:id="@+id/tolerance_band_brown"
         android:title="1%    Brown" />
 
     <item
-        android:id="@+id/toleranceBandRed"
+        android:id="@+id/tolerance_band_red"
         android:title="2%    Red" />
 
     <item
-        android:id="@+id/toleranceBandOrange"
+        android:id="@+id/tolerance_band_orange"
         android:title="0.05%    Orange" />
 
     <item
-        android:id="@+id/toleranceBandYellow"
+        android:id="@+id/tolerance_band_yellow"
         android:title="0.02%    Yellow" />
 
     <item
-        android:id="@+id/toleranceBandGreen"
+        android:id="@+id/tolerance_band_green"
         android:title="0.5%    Green" />
 
     <item
-        android:id="@+id/toleranceBandBlue"
+        android:id="@+id/tolerance_band_blue"
         android:title="0.25%    Blue" />
 
     <item
-        android:id="@+id/toleranceBandViolet"
+        android:id="@+id/tolerance_band_violet"
         android:title="0.1%    Violet" />
 
     <item
-        android:id="@+id/toleranceBandGrey"
+        android:id="@+id/tolerance_band_grey"
         android:title="0.01%    Grey" />
 </menu>
