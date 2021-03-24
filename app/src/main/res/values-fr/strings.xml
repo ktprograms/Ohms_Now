@@ -1,0 +1,86 @@
+<!--
+  ~ GNU General Public License v3.0
+  ~
+  ~ Copyright (c) 2021 Toh Jeen Gie Keith
+  ~
+  ~
+  ~ This file is part of Ohms Now!.
+  ~
+  ~ Ohms Now! is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Ohms Now! is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <string name="app_name">Ohms Now!</string>
+
+    <string name="band_menu_black">0\t\tNoir</string>
+    <string name="band_menu_brown">1\t\tMarron</string>
+    <string name="band_menu_red">2\t\tRouge</string>
+    <string name="band_menu_orange">3\t\tOrange</string>
+    <string name="band_menu_yellow">4\t\tJaune</string>
+    <string name="band_menu_green">5\t\tVert</string>
+    <string name="band_menu_blue">6\t\tBleu</string>
+    <string name="band_menu_violet">7\t\tViolet</string>
+    <string name="band_menu_grey">8\t\tGris</string>
+    <string name="band_menu_white">9\t\tBlanc</string>
+
+    <string name="multiplier_band_3_4_pink">0.0xx Ω\t\tRose</string>
+    <string name="multiplier_band_3_4_silver">0.xx Ω\t\tArgent</string>
+    <string name="multiplier_band_3_4_gold">x.x Ω\t\tOr</string>
+    <string name="multiplier_band_3_4_black">xx Ω\t\tNoir</string>
+    <string name="multiplier_band_3_4_brown">xx0 Ω\t\tMarron</string>
+    <string name="multiplier_band_3_4_red">x.x KΩ\t\tRouge</string>
+    <string name="multiplier_band_3_4_orange">xx KΩ\t\tOrange</string>
+    <string name="multiplier_band_3_4_yellow">xx0 KΩ\t\tJaune</string>
+    <string name="multiplier_band_3_4_green">x.x MΩ\t\tVert</string>
+    <string name="multiplier_band_3_4_blue">xx MΩ\t\tBleu</string>
+    <string name="multiplier_band_3_4_violet">xx0 MΩ\t\tViolet</string>
+    <string name="multiplier_band_3_4_grey">x.x GΩ\t\tGris</string>
+    <string name="multiplier_band_3_4_white">xx GΩ\t\tBlanc</string>
+
+    <string name="multiplier_band_5_6_pink">0.xxx Ω\t\tRose</string>
+    <string name="multiplier_band_5_6_silver">x.xx Ω\t\tArgent</string>
+    <string name="multiplier_band_5_6_gold">xx.x Ω\t\tOr</string>
+    <string name="multiplier_band_5_6_black">xxx Ω\t\tNoir</string>
+    <string name="multiplier_band_5_6_brown">x.xx KΩ\t\tMarron</string>
+    <string name="multiplier_band_5_6_red">xx.x KΩ\t\tRouge</string>
+    <string name="multiplier_band_5_6_orange">xxx KΩ\t\tOrange</string>
+    <string name="multiplier_band_5_6_yellow">x.xx MΩ\t\tJaune</string>
+    <string name="multiplier_band_5_6_green">xx.x MΩ\t\tVert</string>
+    <string name="multiplier_band_5_6_blue">xxx MΩ\t\tBleu</string>
+    <string name="multiplier_band_5_6_violet">x.xx GΩ\t\tViolet</string>
+    <string name="multiplier_band_5_6_grey">xx.x GΩ\t\tGris</string>
+    <string name="multiplier_band_5_6_white">xxx GΩ\t\tBlanc</string>
+
+    <string name="temp_coef_band_black">250 ppm/K\t\tNoir</string>
+    <string name="temp_coef_band_brown">100 ppm/K\t\tMarron</string>
+    <string name="temp_coef_band_red">50 ppm/K\t\tRouge</string>
+    <string name="temp_coef_band_orange">15 ppm/K\t\tOrange</string>
+    <string name="temp_coef_band_yellow">25 ppm/K\t\tJaune</string>
+    <string name="temp_coef_band_green">20 ppm/K\t\tVert</string>
+    <string name="temp_coef_band_blue">10 ppm/K\t\tBleu</string>
+    <string name="temp_coef_band_violet">5 ppm/K\t\tViolet</string>
+    <string name="temp_coef_band_grey">1 ppm/K\t\tGris</string>
+
+    <string name="tolerance_band_none">20%\t\tRien</string>
+    <string name="tolerance_band_silver">10%\t\tArgent</string>
+    <string name="tolerance_band_gold">5%\t\tOr</string>
+    <string name="tolerance_band_brown">1%\t\tMarron</string>
+    <string name="tolerance_band_red">2%\t\tRouge</string>
+    <string name="tolerance_band_orange">0.05%\t\tOrange</string>
+    <string name="tolerance_band_yellow">0.02%\t\tJaune</string>
+    <string name="tolerance_band_green">0.5%\t\tVert</string>
+    <string name="tolerance_band_blue">0.25%\t\tBleu</string>
+    <string name="tolerance_band_violet">0.1%\t\tViolet</string>
+    <string name="tolerance_band_grey">0.01%\t\tGris</string>
+</resources>
