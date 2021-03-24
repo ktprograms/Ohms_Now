@@ -26,53 +26,53 @@
 
     <item
         android:id="@+id/multiplier_band_pink_3_4_band"
-        android:title="0.0xx Ω    Pink" />
+        android:title="@string/multiplier_band_3_4_pink" />
 
     <item
         android:id="@+id/multiplier_band_sliver_3_4_band"
-        android:title="0.xx Ω    Silver" />
+        android:title="@string/multiplier_band_3_4_silver" />
 
     <item
         android:id="@+id/multiplier_band_gold_3_4_band"
-        android:title="x.x Ω    Gold" />
+        android:title="@string/multiplier_band_3_4_gold" />
 
     <item
         android:id="@+id/multiplier_band_black_3_4_band"
-        android:title="xx Ω    Black" />
+        android:title="@string/multiplier_band_3_4_black" />
 
     <item
         android:id="@+id/multiplier_band_brown_3_4_band"
-        android:title="xx0 Ω    Brown" />
+        android:title="@string/multiplier_band_3_4_brown" />
 
     <item
         android:id="@+id/multiplier_band_red_3_4_band"
-        android:title="x.x KΩ    Red" />
+        android:title="@string/multiplier_band_3_4_red" />
 
     <item
         android:id="@+id/multiplier_band_orange_3_4_band"
-        android:title="xx KΩ    Orange" />
+        android:title="@string/multiplier_band_3_4_orange" />
 
     <item
         android:id="@+id/multiplier_band_yellow_3_4_band"
-        android:title="xx0 KΩ    Yellow" />
+        android:title="@string/multiplier_band_3_4_yellow" />
 
     <item
         android:id="@+id/multiplier_band_green_3_4_band"
-        android:title="x.x MΩ    Green" />
+        android:title="@string/multiplier_band_3_4_green" />
 
     <item
         android:id="@+id/multiplier_band_blue_3_4_band"
-        android:title="xx MΩ    Blue" />
+        android:title="@string/multiplier_band_3_4_blue" />
 
     <item
         android:id="@+id/multiplier_band_violet_3_4_band"
-        android:title="xx0 MΩ    Violet" />
+        android:title="@string/multiplier_band_3_4_violet" />
 
     <item
         android:id="@+id/multiplier_band_grey_3_4_band"
-        android:title="x.x GΩ    Grey" />
+        android:title="@string/multiplier_band_3_4_grey" />
 
     <item
         android:id="@+id/multiplier_band_white_3_4_band"
-        android:title="xx GΩ    White" />
+        android:title="@string/multiplier_band_3_4_white" />
 </menu>

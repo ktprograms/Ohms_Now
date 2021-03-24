@@ -26,45 +26,45 @@
 
     <item
         android:id="@+id/tolerance_band_none"
-        android:title="20%    None" />
+        android:title="@string/tolerance_band_none" />
 
     <item
         android:id="@+id/tolerance_band_sliver"
-        android:title="10%    Silver" />
+        android:title="@string/tolerance_band_silver" />
 
     <item
         android:id="@+id/tolerance_band_gold"
-        android:title="5%    Gold" />
+        android:title="@string/tolerance_band_gold" />
 
     <item
         android:id="@+id/tolerance_band_brown"
-        android:title="1%    Brown" />
+        android:title="@string/tolerance_band_brown" />
 
     <item
         android:id="@+id/tolerance_band_red"
-        android:title="2%    Red" />
+        android:title="@string/tolerance_band_red" />
 
     <item
         android:id="@+id/tolerance_band_orange"
-        android:title="0.05%    Orange" />
+        android:title="@string/tolerance_band_orange" />
 
     <item
         android:id="@+id/tolerance_band_yellow"
-        android:title="0.02%    Yellow" />
+        android:title="@string/tolerance_band_yellow" />
 
     <item
         android:id="@+id/tolerance_band_green"
-        android:title="0.5%    Green" />
+        android:title="@string/tolerance_band_green" />
 
     <item
         android:id="@+id/tolerance_band_blue"
-        android:title="0.25%    Blue" />
+        android:title="@string/tolerance_band_blue" />
 
     <item
         android:id="@+id/tolerance_band_violet"
-        android:title="0.1%    Violet" />
+        android:title="@string/tolerance_band_violet" />
 
     <item
         android:id="@+id/tolerance_band_grey"
-        android:title="0.01%    Grey" />
+        android:title="@string/tolerance_band_grey" />
 </menu>

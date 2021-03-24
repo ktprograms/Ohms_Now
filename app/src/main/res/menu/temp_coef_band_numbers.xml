@@ -25,37 +25,37 @@
 
     <item
         android:id="@+id/temp_coef_band_black"
-        android:title="250 ppm/K    Black" />
+        android:title="@string/temp_coef_band_black" />
 
     <item
         android:id="@+id/temp_coef_band_brown"
-        android:title="100 ppm/K    Brown" />
+        android:title="@string/temp_coef_band_brown" />
 
     <item
         android:id="@+id/temp_coef_band_red"
-        android:title="50 ppm/K    Red" />
+        android:title="@string/temp_coef_band_red" />
 
     <item
         android:id="@+id/temp_coef_band_orange"
-        android:title="15 ppm/K    Orange" />
+        android:title="@string/temp_coef_band_orange" />
 
     <item
         android:id="@+id/temp_coef_band_yellow"
-        android:title="25 ppm/K    Yellow" />
+        android:title="@string/temp_coef_band_yellow" />
 
     <item
         android:id="@+id/temp_coef_band_green"
-        android:title="20 ppm/K    Green" />
+        android:title="@string/temp_coef_band_green" />
 
     <item
         android:id="@+id/temp_coef_band_blue"
-        android:title="10 ppm/K    Blue" />
+        android:title="@string/temp_coef_band_blue" />
 
     <item
         android:id="@+id/temp_coef_band_violet"
-        android:title="5 ppm/K    Violet" />
+        android:title="@string/temp_coef_band_violet" />
 
     <item
         android:id="@+id/temp_coef_band_grey"
-        android:title="1 ppm/K    Grey" />
+        android:title="@string/temp_coef_band_grey" />
 </menu>

@@ -25,41 +25,41 @@
 
     <item
         android:id="@+id/band_black"
-        android:title="0    Black" />
+        android:title="@string/band_menu_black" />
 
     <item
         android:id="@+id/band_brown"
-        android:title="1    Brown" />
+        android:title="@string/band_menu_brown" />
 
     <item
         android:id="@+id/band_red"
-        android:title="2    Red" />
+        android:title="@string/band_menu_red" />
 
     <item
         android:id="@+id/band_orange"
-        android:title="3    Orange" />
+        android:title="@string/band_menu_orange" />
 
     <item
         android:id="@+id/band_yellow"
-        android:title="4    Yellow" />
+        android:title="@string/band_menu_yellow" />
 
     <item
         android:id="@+id/band_green"
-        android:title="5    Green" />
+        android:title="@string/band_menu_green" />
 
     <item
         android:id="@+id/band_blue"
-        android:title="6    Blue" />
+        android:title="@string/band_menu_blue" />
 
     <item
         android:id="@+id/band_violet"
-        android:title="7    Violet" />
+        android:title="@string/band_menu_violet" />
 
     <item
         android:id="@+id/band_grey"
-        android:title="8    Grey" />
+        android:title="@string/band_menu_grey" />
 
     <item
         android:id="@+id/band_white"
-        android:title="9    White" />
+        android:title="@string/band_menu_white" />
 </menu>
