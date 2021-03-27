@@ -1,5 +1,12 @@
 # Changelogs
 
+### V 0.1.6 Beta
+- Added French Translations (thanks to Sitavi on GitHub).
+
+>MD5: 13cb8731938eee1d8bcad60bbd3d0373
+>
+>SHA1: 1f6ea036d831e426681f8d82ebe7623d94d67ffd
+
 ### V 0.1.5 Beta
 - Added support for 6 band resistors.
 

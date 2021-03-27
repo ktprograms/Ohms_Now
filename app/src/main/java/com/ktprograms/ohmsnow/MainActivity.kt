@@ -268,6 +268,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        // Call decodeOhms to initialize the ohmsTextView
+        decodeOhms()
     }
 
     // Check if a band was clicked

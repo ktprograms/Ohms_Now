@@ -1,0 +1,1 @@
+Added French Translations (thanks to Sitavi on GitHub).
