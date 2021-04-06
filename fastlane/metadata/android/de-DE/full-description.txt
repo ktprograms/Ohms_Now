@@ -1,0 +1,9 @@
+<i>Ohms Now!</i> ist eine simple App, welche dir hilft die Farbbänder von Widerständen zu dekodieren.
+
+Tippe einfach auf jedes Band, um seine Farbe zu ändern. Sobald du alle Bänder so eingestellt hast, dass sie den Farben des Widerstands entsprechen, kannst du den Wert im Textfeld darunter ablesen.
+
+Wenn du lange auf ein Band drückst, wird ein Popup-Menü angezeigt, in dem du die Farbe des Bandes auswählen kannst.
+
+Du kannst nach links/rechts wischen, um zum vorherigen/nächsten Wert der E-Serie zu gelangen.
+
+Wenn du dich im 5-Band-Modus befindest, kannst du durch Tippen auf das "6"-Symbol oben rechts in den 6-Band-Modus wechseln. Durch erneutes Tippen auf das Symbol (das sich dann in ein "5"-Symbol geändert hat) kehrst du in den 5-Band-Modus zurück.
