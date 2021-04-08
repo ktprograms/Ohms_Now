@@ -1,0 +1,9 @@
+<i>Ohms Now!</i> je jednoduchá aplikace, která vám pomůže dekódovat barevné proužky na rezistorech.
+
+Jednoduše klepněte na jakýkoliv proužek, abyste změnili jeho barvu. Až budete mít všechny proužky nastavené tak, aby odpovídaly vašemu rezistoru, můžete zjistit jeho hodnotu v textovém poli níže.
+
+Dlouhým podržením proužku se zobrazí okno, ve kterém můžete vybrat konkrétní barvu proužku.
+
+Přejetím doleva/doprava přejdete na předchozí/následující hodnotu řady E.
+
+V režimu s 5 proužky přejdete na režim s 6 klepnutím na ikonu '6' v pravém horním rohu. Klepnutím na ikonu (která se změnila na ikonu '5') znovu se vrátíte zpět do režimu s 5 proužky.
