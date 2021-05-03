@@ -1,0 +1,1 @@
+Added German and Czech Translations (thanks to EngelGames and ShimonHoranek on GitHub).

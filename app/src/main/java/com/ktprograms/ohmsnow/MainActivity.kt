@@ -229,42 +229,30 @@ class MainActivity : AppCompatActivity() {
         screen.setOnLongClickListener {
             hadNoLongPress = false
             when (touchedBand) {
-                0 -> showBandPopup(band1, band1State, object: BandCallback {
-                    override fun onCallback(returnBandState: BandColors) {
-                        band1State = returnBandState
-                        updateAll()
-                    }
-                })
-                1 -> showBandPopup(band2, band2State, object: BandCallback {
-                    override fun onCallback(returnBandState: BandColors) {
-                        band2State = returnBandState
-                        updateAll()
-                    }
-                })
-                2 -> showBandPopup(band3, band3State, object: BandCallback {
-                    override fun onCallback(returnBandState: BandColors) {
-                        band3State = returnBandState
-                        updateAll()
-                    }
-                })
-                3 -> showMultiplierBandPopup(bandMultiplier, bandMultiplierState, object: MultiplierBandCallback {
-                    override fun onCallback(returnBandState: MultiplierBandColors) {
-                        bandMultiplierState = returnBandState
-                        updateAll()
-                    }
-                })
-                4 -> showTempCoefBandPopup(bandTempCoef, bandTempCoefState, object : TempCoefBandCallback {
-                    override fun onCallback(returnBandState: TempCoefBandColors) {
-                        bandTempCoefState = returnBandState
-                        updateAll()
-                    }
-                })
-                5 -> showToleranceBandPopup(bandTolerance, bandToleranceState, object: ToleranceBandCallback {
-                    override fun onCallback(returnBandState: ToleranceBandColors) {
-                        bandToleranceState = returnBandState
-                        updateAll()
-                    }
-                })
+                0 -> showBandPopup(band1, band1State) {
+                    band1State = it
+                    updateAll()
+                }
+                1 -> showBandPopup(band2, band2State) {
+                    band2State = it
+                    updateAll()
+                }
+                2 -> showBandPopup(band3, band3State) {
+                    band3State = it
+                    updateAll()
+                }
+                3 -> showMultiplierBandPopup(bandMultiplier, bandMultiplierState) {
+                    bandMultiplierState = it
+                    updateAll()
+                }
+                4 -> showTempCoefBandPopup(bandTempCoef, bandTempCoefState) {
+                    bandTempCoefState = it
+                    updateAll()
+                }
+                5 -> showToleranceBandPopup(bandTolerance, bandToleranceState) {
+                    bandToleranceState = it
+                    updateAll()
+                }
             }
             true
         }
@@ -421,12 +409,12 @@ class MainActivity : AppCompatActivity() {
         }
 
     // Show popup menu on view
-    private fun showBandPopup(band: ImageButton, bandState: BandColors, c: BandCallback) {
+    private fun showBandPopup(band: ImageButton, bandState: BandColors, f: (BandColors) -> Unit) {
         val popup = PopupMenu(this, band)
         popup.inflate(R.menu.band_numbers)
 
         popup.setOnMenuItemClickListener {
-            val returnBandState = when (it!!.itemId) {
+            f(when (it!!.itemId) {
                 R.id.band_black -> BandColors.BLACK
                 R.id.band_brown -> BandColors.BROWN
                 R.id.band_red -> BandColors.RED
@@ -438,21 +426,20 @@ class MainActivity : AppCompatActivity() {
                 R.id.band_grey -> BandColors.GREY
                 R.id.band_white -> BandColors.WHITE
                 else -> bandState
-            }
-            c.onCallback(returnBandState)
+            })
             true
         }
 
         popup.show()
     }
-    private fun showMultiplierBandPopup(band: ImageButton, bandState: MultiplierBandColors, c: MultiplierBandCallback) {
+    private fun showMultiplierBandPopup(band: ImageButton, bandState: MultiplierBandColors, f: (MultiplierBandColors) -> Unit) {
         val popup = PopupMenu(this, band)
 
         if (!fiveSixBands) {
             popup.inflate(R.menu.multiplier_band_numbers_3_4_band)
 
             popup.setOnMenuItemClickListener {
-                val returnBandState = when (it!!.itemId) {
+                f(when (it!!.itemId) {
                     R.id.multiplier_band_pink_3_4_band -> MultiplierBandColors.PINK
                     R.id.multiplier_band_sliver_3_4_band -> MultiplierBandColors.SILVER
                     R.id.multiplier_band_gold_3_4_band -> MultiplierBandColors.GOLD
@@ -467,15 +454,14 @@ class MainActivity : AppCompatActivity() {
                     R.id.multiplier_band_grey_3_4_band -> MultiplierBandColors.GREY
                     R.id.multiplier_band_white_3_4_band -> MultiplierBandColors.WHITE
                     else -> bandState
-                }
-                c.onCallback(returnBandState)
+                })
                 true
             }
         } else {
             popup.inflate(R.menu.multiplier_band_numbers_5_6_band)
 
             popup.setOnMenuItemClickListener {
-                val returnBandState = when (it!!.itemId) {
+                f(when (it!!.itemId) {
                     R.id.multiplier_band_pink_5_6_band -> MultiplierBandColors.PINK
                     R.id.multiplier_band_sliver_5_6_band -> MultiplierBandColors.SILVER
                     R.id.multiplier_band_gold_5_6_band -> MultiplierBandColors.GOLD
@@ -490,20 +476,19 @@ class MainActivity : AppCompatActivity() {
                     R.id.multiplier_band_grey_5_6_band -> MultiplierBandColors.GREY
                     R.id.multiplier_band_white_5_6_band -> MultiplierBandColors.WHITE
                     else -> bandState
-                }
-                c.onCallback(returnBandState)
+                })
                 true
             }
         }
 
         popup.show()
     }
-    private fun showTempCoefBandPopup(band: ImageButton, bandState: TempCoefBandColors, c: TempCoefBandCallback) {
+    private fun showTempCoefBandPopup(band: ImageButton, bandState: TempCoefBandColors, f: (TempCoefBandColors) -> Unit) {
         val popup = PopupMenu(this, band)
         popup.inflate(R.menu.temp_coef_band_numbers)
 
         popup.setOnMenuItemClickListener {
-            val returnBandState = when (it!!.itemId) {
+            f(when (it!!.itemId) {
                 R.id.temp_coef_band_black -> TempCoefBandColors.BLACK
                 R.id.temp_coef_band_brown -> TempCoefBandColors.BROWN
                 R.id.temp_coef_band_red -> TempCoefBandColors.RED
@@ -514,19 +499,18 @@ class MainActivity : AppCompatActivity() {
                 R.id.temp_coef_band_violet -> TempCoefBandColors.VIOLET
                 R.id.temp_coef_band_grey -> TempCoefBandColors.GREY
                 else -> bandState
-            }
-            c.onCallback(returnBandState)
+            })
             true
         }
 
         popup.show()
     }
-    private fun showToleranceBandPopup(band: ImageButton, bandState: ToleranceBandColors, c: ToleranceBandCallback) {
+    private fun showToleranceBandPopup(band: ImageButton, bandState: ToleranceBandColors, f: (ToleranceBandColors) -> Unit) {
         val popup = PopupMenu(this, band)
         popup.inflate(R.menu.tolerance_band_numbers)
 
         popup.setOnMenuItemClickListener {
-            val returnBandState = when (it!!.itemId) {
+            f(when (it!!.itemId) {
                 R.id.tolerance_band_none -> ToleranceBandColors.NONE
                 R.id.tolerance_band_sliver -> ToleranceBandColors.SILVER
                 R.id.tolerance_band_gold -> ToleranceBandColors.GOLD
@@ -539,8 +523,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.tolerance_band_violet -> ToleranceBandColors.VIOLET
                 R.id.tolerance_band_grey -> ToleranceBandColors.GREY
                 else -> bandState
-            }
-            c.onCallback(returnBandState)
+            })
             true
         }
 
@@ -605,20 +588,6 @@ class MainActivity : AppCompatActivity() {
         updateBandTempCoef()
 
         decodeOhms()
-    }
-
-    // Interfaces for callback on setOnMenuItemClickListener
-    private interface BandCallback {
-        fun onCallback(returnBandState: BandColors)
-    }
-    private interface MultiplierBandCallback {
-        fun onCallback(returnBandState: MultiplierBandColors)
-    }
-    private interface TempCoefBandCallback {
-        fun onCallback(returnBandState: TempCoefBandColors)
-    }
-    private interface ToleranceBandCallback {
-        fun onCallback(returnBandState: ToleranceBandColors)
     }
 
     // Initialize the menu
