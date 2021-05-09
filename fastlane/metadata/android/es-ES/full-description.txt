@@ -1,0 +1,9 @@
+<i>Ohms Now!</i> es una sencilla aplicación que te ayuda a decodificar las bandas de color de las resistencias.
+
+Sólo tienes que tocar en cada banda para cambiar su color. Una vez que hayas establecido todas las bandas para que coincidan con los colores de tu resistencia, podrás leer su valor en el campo de texto que hay debajo.
+
+Al mantener presionado sobre una banda, aparecerá un menú emergente que te permite elegir el color de la banda.
+
+Puedes deslizar hacia la izquierda o derecha para cambiar el valor anterior/siguiente de la serie E.
+
+Cuando estés en el modo de 5 bandas, toca el icono "6" en la parte superior derecha para entrar al modo de 6 bandas. Si tocas nuevamente el icono (que se cambió a "5"), regresarás a 5 bandas.
