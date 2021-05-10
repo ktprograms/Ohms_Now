@@ -1,5 +1,12 @@
 # Changelogs
 
+### V 0.1.8 Beta
+- Added Spanish Translations (thanks to sguinetti on GitHub).
+
+>MD5: 03e6b31bbdf4a08789b8a67019d726a
+>
+>SHA1: b4cbf4746952e71424d269b4d2639d6b3754cf7f
+
 ### V 0.1.7 Beta
 - Added German and Czech Translations (thanks to EngelGames and ShimonHoranek on GitHub).
 
