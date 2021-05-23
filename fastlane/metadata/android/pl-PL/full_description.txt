@@ -1,0 +1,9 @@
+<i>Omy Teraz!</i> jest prostą apką, która pomaga ci dekodować kolorowe paski na opornikach.
+
+Po prostu naciśnij na każdy z pasków żeby zmienić jego kolor. Gdy już ustawisz je wszystkie na wzór kolorów twojego opornika, będziesz mógł odczytać jego wartość w polu tekstowym poniżej.
+
+Przytrzymanie paska wyświetli menu z którego możesz wybrać kolor paska.
+
+Możesz przesuwać w lewo/prawo by iść do poprzedniej/następnej wartości serii E.
+
+Gdy w trybie 5 pasków, naciśnięcie ikony "6" w prawym górnym rogu przeniesie cię do trybu 6 pasków. Naciśnięcie tej ikony (która po naciśnięciu zmieni się na "5") ponownie, powróci do trybu 5 pasków.
