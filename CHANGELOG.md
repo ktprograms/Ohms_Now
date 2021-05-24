@@ -1,5 +1,12 @@
 # Changelogs
 
+### V 0.1.9 Beta
+- Added Esperanto and Polish Translations (thanks to jakubfabijan on GitHub).
+
+>MD5: cc52984fe562e9eb5af110aa1829a11e
+>
+>SHA1: 8587c7b1290974c856291ce1df99c59cbe16c947
+
 ### V 0.1.8 Beta
 - Added Spanish Translations (thanks to sguinetti on GitHub).
 
