@@ -23,6 +23,8 @@
 package com.ktprograms.ohmsnow
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -45,18 +47,21 @@ import kotlin.math.pow
 
 class MainActivity : AppCompatActivity() {
     // View references
-    private lateinit var screen: ConstraintLayout
-    private lateinit var resistorBody: ImageView
-    private lateinit var band1: ImageButton
-    private lateinit var band2: ImageButton
+    private val resistorScreenConstraintLayout: ConstraintLayout by lazy { findViewById(R.id.resistor_screen_constraint_layout) }
+    private val resistorBody: ImageView by lazy { findViewById(R.id.resistor_body) }
+    private val band1: ImageButton by lazy { findViewById(R.id.band_1) }
+    private val band2: ImageButton by lazy { findViewById(R.id.band_2) }
     private lateinit var band3: ImageButton
     private lateinit var bandMultiplier: ImageButton
     private lateinit var bandTolerance: ImageButton
     private lateinit var bandTempCoef: ImageButton
-    private lateinit var ohmsTextView: TextView
+    private val ohmsTextView: TextView by lazy { findViewById(R.id.ohms_text_view) }
 
     // Menu reference
     private lateinit var menu: Menu
+
+    // Shared Preference reference
+    private val sp: SharedPreferences by lazy { getSharedPreferences("Prefs", MODE_PRIVATE) }
 
     // Band color states
     private var band1State = BandColors.BLUE
@@ -89,6 +94,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (sp.getString("Current", null) == "Capacitor") {
+            startActivity(Intent(applicationContext, CapacitorActivity::class.java))
+        }
+
         // Put the app icon in the app bar
         supportActionBar?.setDisplayShowHomeEnabled(true)
         if ((applicationContext.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_NO) {
@@ -99,11 +108,6 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayUseLogoEnabled(true)
 
         // View references
-        screen = findViewById(R.id.screen)
-        resistorBody = findViewById(R.id.resistor_body)
-        ohmsTextView = findViewById(R.id.ohms_text_view)
-        band1 = findViewById(R.id.band_1)
-        band2 = findViewById(R.id.band_2)
         bandMultiplier = findViewById(R.id.band_3)
         bandTolerance = findViewById(R.id.band_6)
 
@@ -122,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.band_5).isDrawingCacheEnabled = true
 
         // On touch listener
-        screen.setOnTouchListener { _, m ->
+        resistorScreenConstraintLayout.setOnTouchListener { _, m ->
             when (m.action) {
                 MotionEvent.ACTION_DOWN -> {
                     touchedBand = -1
@@ -226,7 +230,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // On long click listener
-        screen.setOnLongClickListener {
+        resistorScreenConstraintLayout.setOnLongClickListener {
             hadNoLongPress = false
             when (touchedBand) {
                 0 -> showBandPopup(band1, band1State) {
@@ -296,20 +300,20 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun decodeOhms() {
         var ohms = if (!fiveSixBands) {
-            (((band1State.ordinal * 10) + band2State.ordinal) * (10.0.pow(bandMultiplierState.ordinal - 3)))
+            (((band1State.ordinal * 10) + band2State.ordinal) * ((10.0).pow(bandMultiplierState.ordinal - 3)))
         } else {
-            (((band1State.ordinal * 100) + (band2State.ordinal * 10) + band3State.ordinal) * (10.0.pow(bandMultiplierState.ordinal - 3)))
+            (((band1State.ordinal * 100) + (band2State.ordinal * 10) + band3State.ordinal) * ((10.0).pow(bandMultiplierState.ordinal - 3)))
         }
         val multiplier =
             when (floor(log10(ohms)) + 1) {
-                in Double.NEGATIVE_INFINITY..3.0 -> {
+                in (Double.NEGATIVE_INFINITY)..(3.0) -> {
                     ""
                 }
-                in 4.0..6.0 -> {
+                in (4.0)..(6.0) -> {
                     ohms /= 1000
                     "K"
                 }
-                in 7.0..9.0 -> {
+                in (7.0)..(9.0) -> {
                     ohms /= 1000000
                     "M"
                 }
@@ -551,14 +555,14 @@ class MainActivity : AppCompatActivity() {
                     bandMultiplier = findViewById(R.id.band_3)
                 }
                 fiveSixBands = false
-                menu.findItem(R.id.num_bands).isVisible = false
+                menu.findItem(R.id.menu_num_bands).isVisible = false
             }
             else -> {
                 // On 5/6 band resistors, val band3 is R.id.band_3 and val bandMultiplier is R.id.band4
                 bandMultiplier = findViewById(R.id.band_4)
                 bandMultiplier.visibility = View.VISIBLE
                 fiveSixBands = true
-                menu.findItem(R.id.num_bands).isVisible = true
+                menu.findItem(R.id.menu_num_bands).isVisible = true
             }
         }
 
@@ -594,7 +598,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         this.menu = menu!!
         menuInflater.inflate(R.menu.app_bar_menu, this.menu)
-        this.menu.findItem(R.id.num_bands).isVisible = false
+        this.menu.findItem(R.id.menu_num_bands).isVisible = false
+        this.menu.findItem(R.id.menu_resistor).isVisible = false
         return true
     }
 
@@ -602,17 +607,17 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("UseCompatLoadingForDrawables")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.num_bands -> {
+            R.id.menu_num_bands -> {
                 if (!sixBands) {
                     sixBands = true
-                    menu.findItem(R.id.num_bands).icon = resources.getDrawable(R.drawable.icon_5)
+                    menu.findItem(R.id.menu_num_bands).icon = resources.getDrawable(R.drawable.icon_5)
 
                     // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
                     bandTolerance = findViewById(R.id.band_5)
                     bandTolerance.visibility = View.VISIBLE
                 } else {
                     sixBands = false
-                    menu.findItem(R.id.num_bands).icon = resources.getDrawable(R.drawable.icon_6)
+                    menu.findItem(R.id.menu_num_bands).icon = resources.getDrawable(R.drawable.icon_6)
 
                     // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
                     if (bandTolerance == findViewById(R.id.band_5)) {
@@ -621,6 +626,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 updateAll()
+            }
+            R.id.menu_capacitor -> {
+                with(sp.edit()) {
+                    putString("Current", "Capacitor")
+                    apply()
+                }
+                startActivity(Intent(applicationContext, CapacitorActivity::class.java))
             }
             else -> return super.onOptionsItemSelected(item)
         }

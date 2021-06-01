@@ -20,6 +20,10 @@ You can swipe left/right to go to the previous/next E series value.
 When in 5 band mode, tapping the '6' icon in the top right will enter into 6 band mode. Tapping the icon (which will have changed to a '5' icon) again will go back to 5 band mode.
 
 <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" width="214" height="419" />
+
+There is now ceramic capacitor decoding with all the same features (long press for list, swipe for values) as with resistors.
+
+<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/7.png" width="214" height="419" />
 <hr />
 
 ## Download

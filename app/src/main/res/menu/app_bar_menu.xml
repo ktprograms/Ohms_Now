@@ -24,9 +24,16 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/num_bands"
+    <item android:id="@+id/menu_num_bands"
         android:icon="@drawable/icon_6"
         android:title="Number of Bands"
         app:showAsAction="always" />
+
+    <item android:id="@+id/menu_resistor"
+        android:title="Resistor"
+        app:showAsAction="never" />
+
+    <item android:id="@+id/menu_capacitor"
+        android:title="Capacitor"
+        app:showAsAction="never" />
 </menu>

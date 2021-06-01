@@ -1,5 +1,12 @@
 # Changelogs
 
+### V 0.2.0 Beta
+- There is now ceramic capacitor decoding with all the same features (long press for list, swipe for values) as with resistors.
+
+>MD5: b66b5399bf43eb91d74c9e71fbc80cc4
+>
+>SHA1: 1191b4bedf7725607df0612f7b9c37f455907eaa
+
 ### V 0.1.9 Beta
 - Added Esperanto and Polish Translations (thanks to jakubfabijan on GitHub).
 

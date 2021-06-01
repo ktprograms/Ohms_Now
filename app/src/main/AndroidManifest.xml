@@ -31,8 +31,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OhmsNow">
-        <activity android:name=".MainActivity"
-            android:screenOrientation="sensorPortrait">
+        <activity
+            android:name=".CapacitorActivity"
+            android:screenOrientation="sensorPortrait"
+            android:noHistory="true" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="sensorPortrait"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

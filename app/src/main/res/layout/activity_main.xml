@@ -156,7 +156,7 @@
         app:layout_constraintTop_toBottomOf="@+id/resistor_body" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/screen"
+        android:id="@+id/resistor_screen_constraint_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:longClickable="true"

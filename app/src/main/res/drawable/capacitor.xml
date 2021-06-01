@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ GNU General Public License v3.0
   ~
   ~ Copyright (c) 2021 Toh Jeen Gie Keith
@@ -23,22 +22,22 @@
 
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="200dp"
-    android:height="110dp"
+    android:height="150dp"
     android:viewportWidth="200.0"
-    android:viewportHeight="110.0">
+    android:viewportHeight="150.0" >
 
-    <path android:fillColor="@color/silver"
-        android:strokeWidth="0"
-        android:strokeColor="@android:color/transparent"
-        android:pathData="M0,45  L10,45  L10,65  L0,65  Z" />
-
-    <path android:fillColor="@color/silver"
-        android:strokeWidth="0"
-        android:strokeColor="@android:color/transparent"
-        android:pathData="M190,45  L200,45  L200,65  L190,65  Z" />
+    <path android:fillColor="#FFE67F16"
+        android:strokeWidth="3"
+        android:strokeColor="@color/grey"
+        android:pathData="M50,55  A50,50,0,1,0,150,55  A50,50,0,1,0,50,55  Z" />
 
     <path android:fillColor="@android:color/transparent"
-        android:strokeWidth="2"
+        android:strokeWidth="4"
         android:strokeColor="@color/grey"
-        android:pathData="M50,30  H150  C180,10 190,30 190,50  V60  C190,80 180,100 150,80  H50  C20,100 10,80 10,60  V50  C10,30 20,10 50,30  Z" />
+        android:pathData="M120,100  L130,120  L130,200" />
+
+    <path android:fillColor="@android:color/transparent"
+        android:strokeWidth="4"
+        android:strokeColor="@color/grey"
+        android:pathData="M80,100  L70,120  L70,200" />
 </vector>

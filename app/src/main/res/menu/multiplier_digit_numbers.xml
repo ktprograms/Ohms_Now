@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ GNU General Public License v3.0
+  ~
+  ~ Copyright (c) 2021 Toh Jeen Gie Keith
+  ~
+  ~
+  ~ This file is part of Ohms Now!.
+  ~
+  ~ Ohms Now! is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ Ohms Now! is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with Ohms Now!.  If not, see <https://www.gnu.org/licenses/>.
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/multiplier_digit_0"
+        android:title="xx pF\t\t0" />
+
+    <item
+        android:id="@+id/multiplier_digit_1"
+        android:title="xx0 pF\t\t1" />
+
+    <item
+        android:id="@+id/multiplier_digit_2"
+        android:title="x.x nF\t\t2" />
+
+    <item
+        android:id="@+id/multiplier_digit_3"
+        android:title="xx nF\t\t3" />
+
+    <item
+        android:id="@+id/multiplier_digit_4"
+        android:title="xx0 nF\t\t4" />
+
+    <item
+        android:id="@+id/multiplier_digit_5"
+        android:title="x.x µF\t\t5" />
+
+    <item
+        android:id="@+id/multiplier_digit_6"
+        android:title="xx µF\t\t6" />
+
+    <item
+        android:id="@+id/multiplier_digit_7"
+        android:title="xx0 µ\t\t7" />
+
+    <item
+        android:id="@+id/multiplier_digit_8"
+        android:title="x.x mF\t\t8" />
+
+    <item
+        android:id="@+id/multiplier_digit_9"
+        android:title="xx mF\t\t9" />
+</menu>
