@@ -26,14 +26,13 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import java.text.DecimalFormat
 import kotlin.math.pow
@@ -88,20 +87,18 @@ class CapacitorActivity : AppCompatActivity() {
                 }
                 MotionEvent.ACTION_UP -> {
                     if (previousX - m.x > MIN_DISTANCE) {
-                        val prevPair = try {
-                            e12.dropLastWhile { (it.first > digit1State) or ((it.first == digit1State) and (it.second >= digit2State)) }.last()
-                        } catch (e: NoSuchElementException) {
-                            digitMultiplierState = if (digitMultiplierState == 0) 9 else digitMultiplierState - 1
+                        val prevPair = e12.lastOrNull {
+                            it.compareTo(Pair(digit1State, digit2State)) < 0
+                        } ?: let { _ ->
                             e12.last()
                         }
                         digit1State = prevPair.first
                         digit2State = prevPair.second
                         updateAll()
                     } else if (m.x - previousX > MIN_DISTANCE) {
-                        val prevPair = try {
-                            e12.dropWhile { (it.first < digit1State) or ((it.first == digit1State) and (it.second <= digit2State)) }.first()
-                        } catch (e: NoSuchElementException) {
-                            digitMultiplierState = if (digitMultiplierState == 9) 0 else digitMultiplierState + 1
+                        val prevPair = e12.firstOrNull {
+                            it.compareTo(Pair(digit1State, digit2State)) > 0
+                        } ?: let { _ ->
                             e12.first()
                         }
                         digit1State = prevPair.first

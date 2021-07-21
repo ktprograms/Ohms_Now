@@ -40,7 +40,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.math.floor
 import kotlin.math.log10
 import kotlin.math.pow
@@ -162,9 +161,9 @@ class MainActivity : AppCompatActivity() {
                                             ToleranceBandColors.GOLD -> e24
                                             else -> listOf(Pair(1, 0))
                                         }.let { l ->
-                                            try {
-                                                l.dropLastWhile { (it.first > band1State.ordinal) or ((it.first == band1State.ordinal) and (it.second >= band2State.ordinal)) }.last()
-                                            } catch (e: NoSuchElementException) {
+                                            l.lastOrNull {
+                                                it.compareTo(Pair(band1State.ordinal, band2State.ordinal)) < 0
+                                            } ?: let { _ ->
                                                 bandMultiplierState = prevMultiplierColor(bandMultiplierState)
                                                 l.last()
                                             }
@@ -177,9 +176,9 @@ class MainActivity : AppCompatActivity() {
                                             ToleranceBandColors.BROWN -> e96
                                             else -> e192
                                         }.let { l ->
-                                            try {
-                                                l.dropLastWhile { (it.first > band1State.ordinal) or ((it.first == band1State.ordinal) and ((it.second > band2State.ordinal) or ((it.second == band2State.ordinal) and (it.third >= band3State.ordinal)))) }.last()
-                                            } catch (e: NoSuchElementException) {
+                                            l.lastOrNull {
+                                                it.compareTo(Triple(band1State.ordinal, band2State.ordinal, band3State.ordinal)) < 0
+                                            } ?: let { _ ->
                                                 bandMultiplierState = prevMultiplierColor(bandMultiplierState)
                                                 l.last()
                                             }
@@ -190,29 +189,33 @@ class MainActivity : AppCompatActivity() {
                                     }
                                 } else if (m.x - previousX > MIN_DISTANCE) {
                                     if (!fiveSixBands) {
-                                        val nextPair = try {
-                                            when (bandToleranceState) {
-                                                ToleranceBandColors.NONE -> e6
-                                                ToleranceBandColors.SILVER -> e12
-                                                ToleranceBandColors.GOLD -> e24
-                                                else -> listOf(Pair(1, 0))
-                                            }.dropWhile { (it.first < band1State.ordinal) or ((it.first == band1State.ordinal) and (it.second <= band2State.ordinal)) }[0]
-                                        } catch (e: IndexOutOfBoundsException) {
-                                            bandMultiplierState = nextMultiplierColor(bandMultiplierState)
-                                            Pair(1, 0)
+                                        val nextPair = when (bandToleranceState) {
+                                            ToleranceBandColors.NONE -> e6
+                                            ToleranceBandColors.SILVER -> e12
+                                            ToleranceBandColors.GOLD -> e24
+                                            else -> listOf(Pair(1, 0))
+                                        }.let { l ->
+                                            l.firstOrNull {
+                                                it.compareTo(Pair(band1State.ordinal, band2State.ordinal)) > 0
+                                            } ?: let { _ ->
+                                                bandMultiplierState = nextMultiplierColor(bandMultiplierState)
+                                                l.first()
+                                            }
                                         }
                                         band1State = BandColors.values()[nextPair.first]
                                         band2State = BandColors.values()[nextPair.second]
                                     } else {
-                                        val nextTriple = try {
-                                            when (bandToleranceState) {
-                                                ToleranceBandColors.RED -> e48
-                                                ToleranceBandColors.BROWN -> e96
-                                                else -> e192
-                                            }.dropWhile { (it.first < band1State.ordinal) or ((it.first == band1State.ordinal) and ((it.second < band2State.ordinal) or ((it.second == band2State.ordinal) and (it.third <= band3State.ordinal)))) }[0]
-                                        } catch (e: IndexOutOfBoundsException) {
-                                            bandMultiplierState = nextMultiplierColor(bandMultiplierState)
-                                            Triple(1, 0, 0)
+                                        val nextTriple = when (bandToleranceState) {
+                                            ToleranceBandColors.RED -> e48
+                                            ToleranceBandColors.BROWN -> e96
+                                            else -> e192
+                                        }.let { l ->
+                                            l.firstOrNull {
+                                                it.compareTo(Triple(band1State.ordinal, band2State.ordinal, band3State.ordinal)) > 0
+                                            } ?: let { _ ->
+                                                bandMultiplierState = nextMultiplierColor(bandMultiplierState)
+                                                l.first()
+                                            }
                                         }
                                         band1State = BandColors.values()[nextTriple.first]
                                         band2State = BandColors.values()[nextTriple.second]

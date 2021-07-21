@@ -22,6 +22,12 @@
 
 package com.ktprograms.ohmsnow
 
+/* Pair and Triple extension functions for comparing values */
+fun <T: Comparable<T>> Pair<T, T>.compareTo(other: Pair<T, T>) =
+        compareValuesBy(this, other, { it.first }, { it.second })
+fun <T: Comparable<T>> Triple<T, T, T>.compareTo(other: Triple<T, T, T>) =
+        compareValuesBy(this, other, { it.first }, { it.second }, { it.third })
+
 val e6 = listOf(
         Pair(1, 0),
         Pair(1, 5),
