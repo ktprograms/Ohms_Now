@@ -162,8 +162,8 @@ class MainActivity : AppCompatActivity() {
                                             else -> listOf(Pair(1, 0))
                                         }.let { l ->
                                             l.lastOrNull {
-                                                it.compareTo(Pair(band1State.ordinal, band2State.ordinal)) < 0
-                                            } ?: let { _ ->
+                                                it < Pair(band1State.ordinal, band2State.ordinal)
+                                            } ?: let {
                                                 bandMultiplierState = prevMultiplierColor(bandMultiplierState)
                                                 l.last()
                                             }
@@ -177,8 +177,8 @@ class MainActivity : AppCompatActivity() {
                                             else -> e192
                                         }.let { l ->
                                             l.lastOrNull {
-                                                it.compareTo(Triple(band1State.ordinal, band2State.ordinal, band3State.ordinal)) < 0
-                                            } ?: let { _ ->
+                                                it < Triple(band1State.ordinal, band2State.ordinal, band3State.ordinal)
+                                            } ?: let {
                                                 bandMultiplierState = prevMultiplierColor(bandMultiplierState)
                                                 l.last()
                                             }
@@ -196,8 +196,8 @@ class MainActivity : AppCompatActivity() {
                                             else -> listOf(Pair(1, 0))
                                         }.let { l ->
                                             l.firstOrNull {
-                                                it.compareTo(Pair(band1State.ordinal, band2State.ordinal)) > 0
-                                            } ?: let { _ ->
+                                                it > Pair(band1State.ordinal, band2State.ordinal)
+                                            } ?: let {
                                                 bandMultiplierState = nextMultiplierColor(bandMultiplierState)
                                                 l.first()
                                             }
@@ -211,8 +211,8 @@ class MainActivity : AppCompatActivity() {
                                             else -> e192
                                         }.let { l ->
                                             l.firstOrNull {
-                                                it.compareTo(Triple(band1State.ordinal, band2State.ordinal, band3State.ordinal)) > 0
-                                            } ?: let { _ ->
+                                                it > Triple(band1State.ordinal, band2State.ordinal, band3State.ordinal)
+                                            } ?: let {
                                                 bandMultiplierState = nextMultiplierColor(bandMultiplierState)
                                                 l.first()
                                             }

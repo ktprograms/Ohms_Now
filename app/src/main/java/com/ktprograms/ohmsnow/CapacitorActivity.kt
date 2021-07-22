@@ -60,7 +60,7 @@ class CapacitorActivity : AppCompatActivity() {
     private val MIN_DISTANCE = 100
 
     // Shared Preference reference
-    val sp: SharedPreferences by lazy { getSharedPreferences("Prefs", MODE_PRIVATE) }
+    private val sp: SharedPreferences by lazy { getSharedPreferences("Prefs", MODE_PRIVATE) }
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,8 +88,8 @@ class CapacitorActivity : AppCompatActivity() {
                 MotionEvent.ACTION_UP -> {
                     if (previousX - m.x > MIN_DISTANCE) {
                         val prevPair = e12.lastOrNull {
-                            it.compareTo(Pair(digit1State, digit2State)) < 0
-                        } ?: let { _ ->
+                            it < Pair(digit1State, digit2State)
+                        } ?: let {
                             e12.last()
                         }
                         digit1State = prevPair.first
@@ -97,8 +97,8 @@ class CapacitorActivity : AppCompatActivity() {
                         updateAll()
                     } else if (m.x - previousX > MIN_DISTANCE) {
                         val prevPair = e12.firstOrNull {
-                            it.compareTo(Pair(digit1State, digit2State)) > 0
-                        } ?: let { _ ->
+                            it > Pair(digit1State, digit2State)
+                        } ?: let {
                             e12.first()
                         }
                         digit1State = prevPair.first
