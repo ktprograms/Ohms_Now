@@ -39,6 +39,8 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.drawToBitmap
 import java.text.DecimalFormat
 import kotlin.math.floor
 import kotlin.math.log10
@@ -115,14 +117,6 @@ class MainActivity : AppCompatActivity() {
 
         // On 6 band resistors, val bandTempCoef is R.id.band6 and val bandTolerance is R.id.band5
         bandTempCoef = findViewById(R.id.band_6)
-
-        // Needed to get the bitmaps later
-        band1.isDrawingCacheEnabled = true
-        band2.isDrawingCacheEnabled = true
-        findViewById<ImageButton>(R.id.band_4).isDrawingCacheEnabled = true
-        bandMultiplier.isDrawingCacheEnabled = true
-        bandTolerance.isDrawingCacheEnabled = true
-        findViewById<ImageButton>(R.id.band_5).isDrawingCacheEnabled = true
 
         // On touch listener
         resistorScreenConstraintLayout.setOnTouchListener { _, m ->
@@ -271,8 +265,7 @@ class MainActivity : AppCompatActivity() {
     // Check if a band was clicked
     private fun bandClicked(m: MotionEvent, band: ImageButton): Boolean {
         return try {
-            if (Bitmap.createBitmap(band.drawingCache)
-                    .getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
+            if (band.drawToBitmap().getPixel(m.x.toInt(), m.y.toInt()) != Color.TRANSPARENT) {
                 if (!fiveSixBands and (band == band3)) {
                     touchedBand = 3
                     return false
@@ -613,14 +606,16 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_num_bands -> {
                 if (!sixBands) {
                     sixBands = true
-                    menu.findItem(R.id.menu_num_bands).icon = resources.getDrawable(R.drawable.icon_5)
+                    menu.findItem(R.id.menu_num_bands).icon =
+                        ContextCompat.getDrawable(applicationContext, R.drawable.icon_5)
 
                     // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
                     bandTolerance = findViewById(R.id.band_5)
                     bandTolerance.visibility = View.VISIBLE
                 } else {
                     sixBands = false
-                    menu.findItem(R.id.menu_num_bands).icon = resources.getDrawable(R.drawable.icon_6)
+                    menu.findItem(R.id.menu_num_bands).icon =
+                        ContextCompat.getDrawable(applicationContext, R.drawable.icon_6)
 
                     // On 6 band resistors, val bandTolerance is R.id.band5 and val bandTempCoef is R.id.band_6
                     if (bandTolerance == findViewById(R.id.band_5)) {
