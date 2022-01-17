@@ -26,7 +26,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
@@ -72,10 +71,8 @@ class MainActivity : AppCompatActivity() {
     private var bandToleranceState = ToleranceBandColors.GOLD
     private var bandTempCoefState = TempCoefBandColors.BLACK
 
-    // Touched band
     private var touchedBand: Int = -1
 
-    // Had no long press
     private var hadNoLongPress = true
 
     // X coordinate on ACTION_DOWN
@@ -295,27 +292,24 @@ class MainActivity : AppCompatActivity() {
     // Convert band color states to a string to display
     @SuppressLint("SetTextI18n")
     private fun decodeOhms() {
-        var ohms = if (!fiveSixBands) {
+        val ohms = if (!fiveSixBands) {
             (((band1State.ordinal * 10) + band2State.ordinal) * ((10.0).pow(bandMultiplierState.ordinal - 3)))
         } else {
             (((band1State.ordinal * 100) + (band2State.ordinal * 10) + band3State.ordinal) * ((10.0).pow(bandMultiplierState.ordinal - 3)))
         }
-        val multiplier =
+        val (value, multiplier) =
             when (floor(log10(ohms)) + 1) {
                 in (Double.NEGATIVE_INFINITY)..(3.0) -> {
-                    ""
+                    ohms to ""
                 }
                 in (4.0)..(6.0) -> {
-                    ohms /= 1000
-                    "K"
+                    ohms / 1000 to "K"
                 }
                 in (7.0)..(9.0) -> {
-                    ohms /= 1000000
-                    "M"
+                    ohms / 1000000 to "M"
                 }
                 else -> {
-                    ohms /= 1000000000
-                    "G"
+                    ohms / 1000000000 to "G"
                 }
             }
         val tolerance =
@@ -346,10 +340,10 @@ class MainActivity : AppCompatActivity() {
             }
         if (fiveSixBands and sixBands) {
             ohmsTextView.text =
-                "${DecimalFormat("0.###").format(ohms)} ${multiplier}Ω ±${tolerance}%\n${tempCoef}ppm/K"
+                "${DecimalFormat("0.###").format(value)} ${multiplier}Ω ±${tolerance}%\n${tempCoef}ppm/K"
         } else {
             ohmsTextView.text =
-                "${DecimalFormat("0.###").format(ohms)} ${multiplier}Ω ±${tolerance}%"
+                "${DecimalFormat("0.###").format(value)} ${multiplier}Ω ±${tolerance}%"
         }
     }
 
