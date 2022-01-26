@@ -1,5 +1,7 @@
 # Ohms Now!
 
+Development has moved to Codeberg. The new repository can be found at https://codeberg.org/ktprograms/Ohms_Now.
+
 ## About
 Ohms Now! is a simple app that helps you decode resistor colour bands.
 
